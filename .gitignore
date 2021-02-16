@@ -1,0 +1,79 @@
+settings.conf
+.netrc
+
+*.pyc
+__pycache__
+settings.conf
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+**/.vscode/
+*.sw[po]
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# General
+.DS_Store
+
+# Data Files
+*.zip
+*.EOF
+*.nc
+*.tif
+*.xml
+*.wbd.json
+*.hdr
+*.vrt
+*.cpt
+*.wbd
+*.geo
+*.html
+*.json
+*.rdr
+*.off
+*.full
+*.int
+*.cor
+*.slc
+*.dem.wgs84
+*.hgt
+*_groups.json
+*.nc.md5
+*.png
+*.dataset.json
+*.txt
+*.txt
+*.xrd
+*.bak
+*.dem
+*.safe
+**/PICKLE/
+**/merged/
+**/master/
+**/slave/
+
+# Log files
+*.log
+*isce.log*
+
+#Permit some data files locally
+!tops_groups.json
+!topsApp_standard_product.xml.tmpl
+
+# test files
+!tests/coseismic_standard_product_pipeline_1/_context.json
+!tests/coseismic_standard_product_pipeline_1/_context.json
+!tests/standard_product_pipeline_1/_context.json
+!tests/standard_product_pipeline_1/_context.json
+
+# Rsync ignore
+.rsyncignore
+
+# Ignore Notebooks
+*.ipynb
