@@ -1,0 +1,6 @@
+{
+  "name": "coseismic",
+  "version": "v1.0.0",
+  "dataset_key": "S1-COSEISMIC-GUNW",
+  "es_index": "grq_*_s1-coseismic-gunw"
+}

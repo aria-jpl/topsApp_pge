@@ -1,0 +1,6 @@
+{
+  "name": "standard-product",
+  "version": "v2.0.4",
+  "dataset_key": "S1-GUNW",
+  "es_index": "grq_*_s1-gunw"
+}

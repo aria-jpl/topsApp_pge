@@ -68,9 +68,13 @@ celerybeat-schedule
 
 # test files
 !tests/coseismic_standard_product_pipeline_1/_context.json
-!tests/coseismic_standard_product_pipeline_1/_context.json
+!tests/coseismic_standard_product_pipeline_2/_context.json
 !tests/standard_product_pipeline_1/_context.json
-!tests/standard_product_pipeline_1/_context.json
+!tests/standard_product_pipeline_2/_context.json
+
+# Config files add back
+!conf/config-coseismic-s1gunw-topsapp.json
+!conf/config-standard-product-s1gunw-topsapp.json
 
 # Rsync ignore
 .rsyncignore
