@@ -18,7 +18,7 @@ This describes how to test and possibly interact with the PGE locally.
    1. Use the `_context.json` as a template (just copy one) and modify as recommended below.
    2. SLCs found in `_context.json` must be download
    3. Ideally figure out small region of interest
-7. From this repo, run your docker container mounting the topsApp PGE and this data repo. Here is my command: `docker run -ti -p 1313:1313 -v $PWD:/home/ops/work -v "$(dirname "$PWD")"/coseismic-topsApp:/home/ops/coseismic-topsApp coseismic_img`
+7. From this repo, run your docker container mounting the topsApp PGE and this data repo. Here is my command: `docker run -ti -p 1313:1313 -v $PWD:/home/ops/topsApp_pge standard_product_img`
 8. Run `startup.sh` to use jupyter and run individual shell scripts from the terminal
 
 ## Modifying the context.json
