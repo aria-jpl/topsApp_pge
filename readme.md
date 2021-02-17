@@ -2,9 +2,9 @@
 
 This repo represents the topsAPP Product Generation Executable (PGE) for the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) portion of the standard product pipeline generating interferograms from Sentinel-1.
 
-This code was mainly written by [Mohammed Karim](https://github.com/mkarim2017) and much of the original code lives in the [ariamh repo](https://github.com/aria-jpl/ariamh).
+This code was primarily written by [Mohammed Karim](https://github.com/mkarim2017) and [David Bekaert](https://github.com/dbekaert). Much of the original code lives in the [ariamh repo](https://github.com/aria-jpl/ariamh) and other contributions and history can be found there.
 
-This code uses the same python script for the two pipelines:
+This code was reorganized so that the same python script could be used for the two pipelines:
 
 1. `coseismic` or
 2. `standard-product`
