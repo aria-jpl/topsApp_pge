@@ -13,7 +13,11 @@ The script uses basic control low determined by which `job-spec` was used to cal
 
 ## Installation
 
-The best to test a build is via the Dockerfile, specifically `docker build -f docker/Dockerfile -t standard_product`. See the testing section for more details on how to test and interact with the code.
+The best to test a build is via the Dockerfile. Specifically from the terminal, navigate to this repo and then build the docker image using:
+
+```docker build -f docker/Dockerfile -t standard_product .```
+
+See the testing section for more details on how to test and interact with the code.
 
 ## Reference for TopsApp
 
