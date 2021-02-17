@@ -1,6 +1,6 @@
 {
   "submission_type": "iteration",
-  "label" : "TopsApp STANDARD PRODUCT PGE for S1-GUNW",
+  "label" : "TopsApp Standard-Product PGE for S1-GUNW Interferograms",
   "allowed_accounts": [ "ops" ],
   "enable_dedup": false,
   "params" : [
