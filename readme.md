@@ -1,36 +1,46 @@
-# topsApp-pge
+# topsApp_pge
 
 This repo represents the topsAPP Product Generation Executable (PGE) for the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) portion of the standard product pipeline generating interferograms from Sentinel-1.
 
+This code was mainly written by [Mohammed Karim](https://github.com/mkarim2017) and much of the original code lives in the [ariamh repo](https://github.com/aria-jpl/ariamh).
+
+This code uses the same python script for the two pipelines:
+
+1. `coseismic` or
+2. `standard-product`
+
+The script uses basic control low determined by which `job-spec` was used to call the job (the `job-spec` used is recorded within the `_context.json`). Note, we have two required pairs of `job-spec` and `hysds-io` files in the `docker` directory. To ensure jobs are not erroneously run, we use machine tags to ensure the `ifg-cfg` datasets used to create the `_context.json` were created using the corresponding pipeline of the job called.
 
 ## Installation
 
-The best way to run this is to build a docker container via `docker build -f docker/Dockerfile -t standard_product`. There is a different repo expounding how this is done. Some initial setup is required to test this because it requires a lot of input data (approximately 15 GB) and can produce output products totally 130 GB.
+The best to test a build is via the Dockerfile, specifically `docker build -f docker/Dockerfile -t standard_product`. See the testing section for more details on how to test and interact with the code.
 
 ## Reference for TopsApp
 
-Takes in SLC data and runs the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) from ISCE2 automatically.
+TopsApp takes in SLC data from Sentinel-1 and runs the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) from ISCE2 automatically. See the linked notebook for a description of the algorithm and how to use this ISCE2 processing outside of the PGE.
 
 ## Testing Setup
 
-See the `readme.md` in tests. It takes a bit of setup which we summarize:
+Use the end-to-end tests expounded in the `tests` directory. Please see the [tests/readme.md](tests/readme.md) for more details.
 
-1. Download (large slc files)
-2. Build and name docker image
-3. Obtain config files necessary for local run
-4. Use docker compose files to run tests on various datasets and pipeline
-
-Once this is setup, a simple `tests/test_all.sh` can be run.
+**Warning**: *each end-to-end test directory can take anywhere from 30 GB (for restricted areas of interest) to 130 GB (for those run on the full area).*
 
 ## Release History
 
-* 0.0.1
+### Coseismic
+
+* v1.0.0
     * Reorganized Repo from [here](https://github.com/aria-jpl/ariamh/tree/ARIA-529/interferogram/sentinel)
+
+### Standard-product
+
+* v2.0.4
+    * Reorganized Repo from [here](https://github.com/aria-jpl/ariamh/tree/ARIA-581/interferogram/sentinel)
 
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork this repo
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
@@ -39,4 +49,4 @@ Once this is setup, a simple `tests/test_all.sh` can be run.
 
 ## Support
 
-To be filled out
+Please put issues in `Issues` page in this repo so we can track needed feature requets.
