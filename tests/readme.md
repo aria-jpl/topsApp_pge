@@ -60,7 +60,7 @@ Using some basic GIS, we look at the swath footprints and create a subset in the
 # Interactive debugging
 
 1. From this repo, run your docker container mounting the entire repo via `docker run -ti -p 1313:1313 -v $PWD:/home/ops/topsApp_pge standard_product_img`. *Note*: normally the container has the current git version (or the Jenkins build on the CI/CD infrastructure), but mounting the local version ensures the container is using the up-to-date code.
-2.  Run `cd tests && bash interactive_startup.sh` to use jupyter and run individual shell scripts from the terminal. *Note*: the interactive startup takes time because you need to change permissions of the conda container to be able to install jupyter. At some point, we should do something about this in the build to make such changes easier.
+2.  Run `cd tests && bash interactive-startup.sh` to use jupyter and run individual shell scripts from the terminal. *Note*: the interactive startup takes time because you need to change permissions of the conda container to be able to install jupyter. At some point, we should do something about this in the build to make such changes easier.
 
 
 
