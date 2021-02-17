@@ -172,7 +172,7 @@
     "command": "/home/ops/coseismic-topsApp/create_standard_coseismic_product_s1.sh",
     "container": "container-aria-jpl_coseismic-topsapp:develop",
     "disk_usage": "200GB",
-    "id": "job-coseismic-s1gunw-topsapp:develop",
+    "id": "job-standard-product-s1gunw-topsapp:develop",
     "imported_worker_files": {
       "/home/ops/.aws": [
         "/home/ops/.aws",
