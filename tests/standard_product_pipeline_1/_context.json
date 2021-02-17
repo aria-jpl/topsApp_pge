@@ -216,7 +216,6 @@
             ]
           ],
           "context": {},
-          "tags": [ "s1-coseismic-gunw" ],
           "dem_type": "Ned1",
           "direction": "asc",
           "endtime": "2020-12-24T01:58:58",

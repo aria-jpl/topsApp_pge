@@ -72,6 +72,8 @@ with open(config_file_path) as file:
 # Coseismic vs. Standard Product Global Variables
 DATASET_KEY = config_data['dataset_key']
 ES_INDEX = config_data['es_index']
+
+# will be `coseismic` or `standard-product`
 JOB_NAME = config_data['name']
 
 # Fill in using config
@@ -88,6 +90,25 @@ logging.basicConfig(filename=LOG_NAME,
                     level=logging.INFO)
 logger = logging.getLogger('create_ifg')
 logger.info(f'The job type is {JOB_NAME}')
+
+# Check if Coseismic Job Name Matches IFG-CFG
+input_metadata = ctx['input_metadata']
+machine_tag = input_metadata.get('tags', [])
+
+# If there is a machine tag, check that it's coseismic otherwise make sure it's
+# the standard product.
+if machine_tag:
+    if not ((machine_tag[0] == "s1-coseismic-gunw")
+            and (JOB_NAME == 'coseismic')):
+        raise ValueError('ifg-cfg is not from coseismic pipeline but'
+                         'a coseismic job was called')
+elif JOB_NAME != 'standard-product':
+    raise ValueError('The coseismic machine tag was not configured'
+                     ' and will not be processed')
+else:
+    pass
+logger.info(f'The machine tag and job name agree for the {JOB_NAME} pipeline')
+
 
 # Use the same template file and then adapt based on context.json
 TEMPLATE_FILE = (os.environ['TOPSAPP'] +

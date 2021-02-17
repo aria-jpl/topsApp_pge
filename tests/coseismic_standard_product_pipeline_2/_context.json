@@ -38,6 +38,7 @@
     "_disk_usage": "100GB",
     "auto_bbox": "true",
     "azimuth_looks": 7,
+    "tags": ["s1-coseismic-gunw"],
     "bbox": [
       [
         29.441013,
