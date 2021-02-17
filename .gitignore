@@ -41,7 +41,7 @@ celerybeat-schedule
 *.int
 *.cor
 *.slc
-*.dem.wgs84
+*.wgs84
 *.hgt
 *_groups.json
 *.nc.md5
