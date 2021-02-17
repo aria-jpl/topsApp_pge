@@ -42,7 +42,7 @@ XML_TMPL = """<component name = "Dem">
     <property name="DELTA_LONGITUDE">
         <value>$delta_lon</value>
     </property>
- 
+
     <component name="Coordinate1">
         <factorymodule>isceobj.Image</factorymodule>
         <factoryname>createCoordinate</factoryname>
@@ -64,7 +64,7 @@ XML_TMPL = """<component name = "Dem">
     <property name="NUMBER_BANDS">
         <value>1</value>
     </property>
- 
+
     <component name="Coordinate2">
         <factorymodule>isceobj.Image</factorymodule>
         <factoryname>createCoordinate</factoryname>
@@ -83,7 +83,7 @@ XML_TMPL = """<component name = "Dem">
             <doc>Coordinate size.</doc>
         </property>
     </component>
- 
+
     <property name="WIDTH">
         <value>$width</value>
     </property>
@@ -199,6 +199,7 @@ def download(url_list, username, password):
             dem_files.append(dem_file)
             continue
         try:
+            logger.info(command + url)
             if os.system(command + url): raise Exception
             dem_files.append(dem_file)
         except Exception as e:
@@ -224,13 +225,13 @@ def stitch(bbox, dem_files, downsample=None):
     #check_call("gdal_translate -of ENVI {} -projwin {} {} {} {} combinedDEM.vrt stitched.dem".format(outsize_opt, bbox[2], bbox[0], bbox[3], bbox[1]), shell=True)
     check_call("gdalwarp combinedDEM.vrt -te {} {} {} {} -of ENVI {} stitched.dem".format( bbox[2], bbox[0], bbox[3], bbox[1], outsize_opt), shell=True)
     #updte data to fill extream values with default value(-32768). First create a new dem file with the update
-    #check_call('gdal_calc.py -A stitched.dem --outfile=stitched_new.dem --calc="-32768*(A<-32768)+A*(A>=-32768)"', shell=True) 
+    #check_call('gdal_calc.py -A stitched.dem --outfile=stitched_new.dem --calc="-32768*(A<-32768)+A*(A>=-32768)"', shell=True)
     check_call('gdal_calc.py --format=ENVI -A stitched.dem --outfile=stitchedFix.dem --calc="A*(A>-1000)" --NoDataValue=0', shell=True)
-    logger.info("Created stitchedFix.dem with updated value")  
+    logger.info("Created stitchedFix.dem with updated value")
     #check_call('gdal_translate -of vrt stitchedFix.dem stitchedFix.dem.vrt', shell=True)
     #logger.info("Created stitchedFix.dem.vrt with updated value")
 
-    #check_call("gdal2isce_xml.py -i stitchedFix.dem", shell=True) 
+    #check_call("gdal2isce_xml.py -i stitchedFix.dem", shell=True)
 
     #switch the new with the origional
     rename_file('stitched.dem', 'stitchedFix.dem')
@@ -311,5 +312,5 @@ if __name__ == '__main__':
     parser.add_argument("-u", "--username", dest="username", help="username")
     parser.add_argument("-p", "--password", dest="password", help="password")
     args = parser.parse_args()
-    sys.exit(main(args.url_base, args.username, args.password, args.action, 
+    sys.exit(main(args.url_base, args.username, args.password, args.action,
                   args.bbox, args.downsample))
