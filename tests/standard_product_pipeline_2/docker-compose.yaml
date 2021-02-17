@@ -1,0 +1,11 @@
+version: '2'
+services:
+  test:
+    image: standard_product_img
+    volumes:
+      - ../..:/home/ops/topsApp_pge
+    command: >
+             bash -c "yes | cp -rf /home/ops/topsApp_pge/.netrc /home/ops/.netrc
+             && cd /home/ops/topsApp_pge/tests/standard_product_pipeline_2
+             && source symbolic_link_data_1.sh
+             && /home/ops/topsApp_pge/create_standard_product_s1.sh"
