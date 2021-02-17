@@ -1,3 +1,4 @@
+version: '2'
 services:
   test:
     image: standard_product_img
