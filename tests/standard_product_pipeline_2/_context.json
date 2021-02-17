@@ -175,7 +175,7 @@
     "command": "/home/ops/ariamh/interferogram/sentinel/create_standard_product_s1.sh",
     "container": "container-aria-jpl_ariamh:develop_singularity_singularity",
     "disk_usage": "200GB",
-    "id": "job-coseismic-s1gunw-topsapp:develop",
+    "id": "job-s1gunw-topsapp:develop",
     "imported_worker_files": {
       "/home/ops/.aws": [
         "/home/ops/.aws",
