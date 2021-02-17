@@ -29,6 +29,8 @@ Use the end-to-end tests expounded in the `tests` directory. Please see the [tes
 
 **Warning**: *each end-to-end test directory can take anywhere from 30 GB (for restricted areas of interest) to 130 GB (for those run on the full area).*
 
+**Warning**: *permissions of a mounted volume within a docker container may change the permissions of local files. I ignore permission changes for git tracking per this [thread](https://stackoverflow.com/questions/1257592/how-do-i-remove-files-saying-old-mode-100755-new-mode-100644-from-unstaged-cha)*.
+
 ## Release History
 
 ### Coseismic
