@@ -1,15 +1,17 @@
 # topsApp_pge
 
-This repo represents the topsAPP Product Generation Executable (PGE) for the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) portion of the standard product pipeline generating interferograms from Sentinel-1.
+This repo represents the topsApp Product Generation Executable (PGE) for the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) portion of the standard product pipeline generating interferograms from Sentinel-1.
 
-This code was primarily written by [Mohammed Karim](https://github.com/mkarim2017) and [David Bekaert](https://github.com/dbekaert). Much of the original code lives in the [ariamh repo](https://github.com/aria-jpl/ariamh) and other contributions and history can be found there.
+This code was primarily written by [Mohammed Karim](https://github.com/mkarim2017) and [David Bekaert](https://github.com/dbekaert). The original code lives in the [ariamh repo](https://github.com/aria-jpl/ariamh) (along with other PGEs).
 
-This code was reorganized so that the same python script could be used for the two pipelines:
+This code was reorganized so that the same python script could be used for the following two pipelines:
 
-1. `coseismic` or
+1. `coseismic`
 2. `standard-product`
 
-The script uses basic control low determined by which `job-spec` was used to call the job (the `job-spec` used is recorded within the `_context.json`). Note, we have two required pairs of `job-spec` and `hysds-io` files in the `docker` directory. To ensure jobs are not erroneously run, we use machine tags to ensure the `ifg-cfg` datasets used to create the `_context.json` were created using the corresponding pipeline of the job called.
+The script uses information from the `job-spec` of the PGE to perform the processing relevant to that pipeline (note there are two pairs of `job-spec` and `hysds-io` files in the `docker` directory corresponding to each pipelines PGE). The `job-spec` metadata is recorded within the `_context.json` per general HySDS operations.
+
+To ensure jobs are not erroneously run using datasets across pipelines, we also check the machine tags of the `ifg-cfg` datasets used to create the `_context.json` to ensure the input datasets were slinged by the correct pipeline.
 
 ## Installation
 
