@@ -68,7 +68,9 @@ celerybeat-schedule
 
 # test files
 !tests/coseismic_standard_product_pipeline_1/_context.json
+!tests/coseismic_standard_product_pipeline_1_full/_context.json
 !tests/coseismic_standard_product_pipeline_2/_context.json
+!tests/coseismic_standard_product_pipeline_2_full/_context.json
 !tests/standard_product_pipeline_1/_context.json
 !tests/standard_product_pipeline_2/_context.json
 

@@ -1,0 +1,449 @@
+{
+  "testing": true,
+  "_command": "/home/ops/coseismic-topsApp/create_standard_coseismic_product_s1.sh",
+  "_disk_usage": "200GB",
+  "_prov": {
+    "wasGeneratedBy": "task_id:c99f0e68-1a87-497f-b96c-f63dd31b8e3c"
+  },
+  "container_image_id": "sha256:b0a30c4b9d38b5858f1d261670e2f00bf4f24d12448bca79a26c1dfe56ff8eef",
+  "container_image_name": "container-aria-jpl_coseismic-topsapp:develop",
+  "container_image_url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_coseismic-topsapp:develop.tar.gz",
+  "container_mappings": {
+    "/home/ops/.aws": [
+      "/home/ops/.aws",
+      "ro"
+    ],
+    "/home/ops/.netrc": [
+      "/home/ops/.netrc"
+    ],
+    "/home/ops/verdi/etc/settings.conf": "/home/ops/coseismic-topsApp/conf/settings.conf"
+  },
+  "container_specification": {
+    "digest": "sha256:b0a30c4b9d38b5858f1d261670e2f00bf4f24d12448bca79a26c1dfe56ff8eef",
+    "id": "container-aria-jpl_coseismic-topsapp:develop",
+    "url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_coseismic-topsapp:develop.tar.gz",
+    "version": "develop"
+  },
+  "dataset_tag": "standard_product_coseismic",
+  "input_metadata": {
+    "_disk_usage": "100GB",
+    "auto_bbox": "true",
+    "azimuth_looks": 7,
+    "bbox": [
+      [
+        37.46277824968067,
+        -121.59344939862989
+      ],
+      [
+        37.46277824968067,
+        -118.48006232259522
+      ],
+      [
+        35.443775,
+        -118.48006232259522
+      ],
+      [
+        35.443775,
+        -121.59344939862989
+      ]
+    ],
+    "context": {},
+    "dem_type": "Ned1",
+    "direction": "asc",
+    "endtime": "2020-12-24T01:58:58",
+    "filter_strength": 0.5,
+    "full_id_hash": "d1cca5f49a75d7fa18bc55d770440a7b",
+    "id": "S1-GUNW-ifg-cfg-RM-M1S2-TN137-20201224T015858-20201218T015907-poeorb-d1cc",
+    "id_hash": "d1cc",
+    "localize_urls": [
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF"
+      },
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+      }
+    ],
+    "master_acquisitions": [
+      "acquisition-S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68-esa_scihub"
+    ],
+    "master_orbit_file": "S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF",
+    "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF",
+    "master_scenes": [
+      "S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68"
+    ],
+    "master_zip_file": [
+      "S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+    ],
+    "master_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+    ],
+    "orbitNumber": [
+      35734,
+      24838
+    ],
+    "platform": "Sentinel-1B",
+    "precise_orbit_only": "true",
+    "priority": 5,
+    "project": [
+      "grfn"
+    ],
+    "range_looks": 19,
+    "slave_acquisitions": [
+      "acquisition-S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9-esa_scihub",
+      "acquisition-S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22-esa_scihub"
+    ],
+    "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF",
+    "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF",
+    "slave_scenes": [
+      "S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9",
+      "S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22"
+    ],
+    "slave_zip_file": [
+      "S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip",
+      "S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+    ],
+    "slave_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip",
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+    ],
+    "slc_master_dt": "20201224T015858",
+    "slc_slave_dt": "20201218T015907",
+    "soft_time_limit": 86400,
+    "starttime": "2020-12-18T01:59:07",
+    "time_limit": 86700,
+    "track_number": 137,
+    "union_geojson": {
+      "coordinates": [
+        [
+          [
+            -118.48006232259522,
+            35.84045477036361
+          ],
+          [
+            -121.228241,
+            35.443775
+          ],
+          [
+            -121.53758961008468,
+            36.73388064943862
+          ],
+          [
+            -121.51280496560523,
+            36.7373875545596
+          ],
+          [
+            -121.59344939862989,
+            37.06881448017987
+          ],
+          [
+            -118.79281485896269,
+            37.46277824968067
+          ],
+          [
+            -118.699089,
+            37.003769
+          ],
+          [
+            -118.71487332706229,
+            37.001534028898064
+          ],
+          [
+            -118.48006232259522,
+            35.84045477036361
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    }
+  },
+  "job_priority": 9,
+  "job_specification": {
+    "command": "/home/ops/coseismic-topsApp/create_standard_coseismic_product_s1.sh",
+    "container": "container-aria-jpl_coseismic-topsapp:develop",
+    "disk_usage": "200GB",
+    "id": "job-coseismic-s1gunw-topsapp:develop",
+    "imported_worker_files": {
+      "/home/ops/.aws": [
+        "/home/ops/.aws",
+        "ro"
+      ],
+      "/home/ops/.netrc": [
+        "/home/ops/.netrc"
+      ],
+      "/home/ops/verdi/etc/settings.conf": "/home/ops/coseismic-topsApp/conf/settings.conf"
+    },
+    "job-version": "develop",
+    "params": [
+      {
+        "destination": "context",
+        "name": "dataset_tag",
+        "value": "standard_product_coseismic"
+      },
+      {
+        "destination": "context",
+        "name": "input_metadata",
+        "value": {
+          "_disk_usage": "100GB",
+          "auto_bbox": "true",
+          "azimuth_looks": 7,
+          "bbox": [
+            [
+              37.46277824968067,
+              -121.59344939862989
+            ],
+            [
+              37.46277824968067,
+              -118.48006232259522
+            ],
+            [
+              35.443775,
+              -118.48006232259522
+            ],
+            [
+              35.443775,
+              -121.59344939862989
+            ]
+          ],
+          "context": {},
+          "tags": [ "s1-coseismic-gunw" ],
+          "dem_type": "Ned1",
+          "direction": "asc",
+          "endtime": "2020-12-24T01:58:58",
+          "filter_strength": 0.5,
+          "full_id_hash": "d1cca5f49a75d7fa18bc55d770440a7b",
+          "id": "S1-GUNW-ifg-cfg-RM-M1S2-TN137-20201224T015858-20201218T015907-poeorb-d1cc",
+          "id_hash": "d1cc",
+          "localize_urls": [
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF"
+            },
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+            }
+          ],
+          "master_acquisitions": [
+            "acquisition-S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68-esa_scihub"
+          ],
+          "master_orbit_file": "S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF",
+          "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF",
+          "master_scenes": [
+            "S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68"
+          ],
+          "master_zip_file": [
+            "S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+          ],
+          "master_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+          ],
+          "orbitNumber": [
+            35734,
+            24838
+          ],
+          "platform": "Sentinel-1B",
+          "precise_orbit_only": "true",
+          "priority": 5,
+          "project": [
+            "grfn"
+          ],
+          "range_looks": 19,
+          "slave_acquisitions": [
+            "acquisition-S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9-esa_scihub",
+            "acquisition-S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22-esa_scihub"
+          ],
+          "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF",
+          "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF",
+          "slave_scenes": [
+            "S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9",
+            "S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22"
+          ],
+          "slave_zip_file": [
+            "S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip",
+            "S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+          ],
+          "slave_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip",
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+          ],
+          "slc_master_dt": "20201224T015858",
+          "slc_slave_dt": "20201218T015907",
+          "soft_time_limit": 86400,
+          "starttime": "2020-12-18T01:59:07",
+          "time_limit": 86700,
+          "track_number": 137,
+          "union_geojson": {
+            "coordinates": [
+              [
+                [
+                  -118.48006232259522,
+                  35.84045477036361
+                ],
+                [
+                  -121.228241,
+                  35.443775
+                ],
+                [
+                  -121.53758961008468,
+                  36.73388064943862
+                ],
+                [
+                  -121.51280496560523,
+                  36.7373875545596
+                ],
+                [
+                  -121.59344939862989,
+                  37.06881448017987
+                ],
+                [
+                  -118.79281485896269,
+                  37.46277824968067
+                ],
+                [
+                  -118.699089,
+                  37.003769
+                ],
+                [
+                  -118.71487332706229,
+                  37.001534028898064
+                ],
+                [
+                  -118.48006232259522,
+                  35.84045477036361
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          }
+        }
+      },
+      {
+        "destination": "localize",
+        "name": "localize_products",
+        "value": [
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF"
+          },
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+          }
+        ]
+      },
+      {
+        "destination": "context",
+        "name": "query",
+        "value": {
+          "query": {
+            "filtered": {
+              "query": {
+                "bool": {
+                  "must": [
+                    {
+                      "term": {
+                        "dataset.raw": "S1-GUNW-ifg-cfg"
+                      }
+                    },
+                    {
+                      "query_string": {
+                        "default_operator": "OR",
+                        "query": "\"S1-GUNW-ifg-cfg-RM-M1S2-TN137-20201224T015858-20201218T015907-poeorb-d1cc\""
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "destination": "context",
+        "name": "name",
+        "value": "Charlie-Marshak-Coseismic-newGH-repo-CA-aria-queue"
+      },
+      {
+        "destination": "context",
+        "name": "username",
+        "value": "hysdsops"
+      }
+    ],
+    "post": [
+      "hysds.utils.triage"
+    ],
+    "recommended-queues": [
+      "standard_product-s1gunw-topsapp-asg-fleet"
+    ],
+    "resource": "jobspec",
+    "soft_time_limit": 7200,
+    "time_limit": 7500
+  },
+  "localize_urls": [
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/13/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942-v1.1/S1B_OPER_AUX_POEORB_OPOD_20210113T111555_V20201223T225942_20201225T005942.EOF"
+    },
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/01/07/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210107T121338_V20201217T225942_20201219T005942.EOF"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/24/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68/S1B_IW_SLC__1SDV_20201224T015831_20201224T015858_024838_02F487_5F68.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9/S1A_IW_SLC__1SDV_20201218T015907_20201218T015934_035734_042E7E_57A9.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2020/12/18/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22/S1A_IW_SLC__1SDV_20201218T015932_20201218T015959_035734_042E7E_CF22.zip"
+    }
+  ],
+  "name": "Charlie-Marshak-Coseismic-newGH-repo-CA-aria-queue",
+  "query": {
+    "query": {
+      "filtered": {
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "dataset.raw": "S1-GUNW-ifg-cfg"
+                }
+              },
+              {
+                "query_string": {
+                  "default_operator": "OR",
+                  "query": "\"S1-GUNW-ifg-cfg-RM-M1S2-TN137-20201224T015858-20201218T015907-poeorb-d1cc\""
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "runtime_options": {},
+  "tag": "Charlie-Marshak-Coseismic-newGH-repo-CA-aria-queue",
+  "username": "hysdsops"
+}
