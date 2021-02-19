@@ -87,3 +87,7 @@ yes | cp -rf /home/ops/topsApp_pge/.netrc /home/ops/.netrc
 && source symbolic_link_data_1.sh
 && /home/ops/topsApp_pge/create_standard_product_s1.sh
 ```
+
+# Logging
+
+A logger's file handle is not written to the volume until it is closed (similar to `gdal`'s dataset). As such, if you were to inspect the log for the relevant job it would be empty. At least it was for me until running `logging.shutdown()` per this [suggestion](https://stackoverflow.com/questions/15435652/python-does-not-release-filehandles-to-logfile). Interestingly, if you copy the log while it is open, it's current contents are copied and you can view the log state.
