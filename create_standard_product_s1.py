@@ -1339,7 +1339,13 @@ def main():
     os.chdir(cwd)
 
     # move standard product to product directory
-    shutil.move(os.path.join('merged', std_prod_file), prod_dir)
+    # Overwrite existing dataset if needed
+    original_product_dir_path = Path(os.path.join('merged', std_prod_file))
+    product_dir_path = Path(prod_dir)
+    shutil.copytree(original_product_dir_path,
+                    product_dir_path,
+                    dirs_exist_ok=True)
+    original_product_dir_path.rmdir()
 
     # generate GDAL (ENVI) headers and move to product directory
     raster_prods = (
@@ -1718,6 +1724,20 @@ def main():
     # update met files key to have python style naming
     md = update_met(md)
 
+    # topsApp End Time
+    complete_end_time = datetime.now()
+    logger.info('TopsApp End Time : {}'.format(complete_end_time))
+
+    complete_run_time = complete_end_time - complete_start_time
+    logger.info('New TopsApp Run Time : {}'.format(complete_run_time))
+
+    # Include runtime stats in metadata file
+    md['runtime_in_seconds'] = round(complete_run_time.total_seconds(), 2)
+    root_directory = Path('.')
+    nbytes = sum(f.stat().st_size
+                 for f in root_directory.glob('**/*') if f.is_file())
+    md['scratch_disk_at_completion_bytes'] = nbytes
+
     # write met json
     logger.info('creating met file : %s' % met_file)
     with open(met_file, 'w') as f:
@@ -1734,13 +1754,6 @@ def main():
     logger.info('nc_file_md5 : {}'.format(nc_file_md5))
     with open(nc_checksum_file, 'w') as f:
         f.write(nc_file_md5)
-
-    # topsApp End Time
-    complete_end_time = datetime.now()
-    logger.info('TopsApp End Time : {}'.format(complete_end_time))
-
-    complete_run_time = complete_end_time - complete_start_time
-    logger.info('New TopsApp Run Time : {}'.format(complete_run_time))
 
 
 def updateErrorFiles(msg):
