@@ -1306,6 +1306,8 @@ def main():
 
     logger.info('prod_dir : %s' % prod_dir)
 
+    Path(prod_dir).mkdir(exist_ok=True, parents=True)
+
     # make metadata geocube
     os.chdir('merged')
     topsApp_path = os.environ['TOPSAPP']
