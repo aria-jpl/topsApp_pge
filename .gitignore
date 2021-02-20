@@ -50,6 +50,7 @@ celerybeat-schedule
 *.txt
 *.txt
 *.xrd
+*.xsd
 *.bak
 *.dem
 *.safe
