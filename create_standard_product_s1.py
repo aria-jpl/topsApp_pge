@@ -1307,6 +1307,7 @@ def main():
     logger.info('prod_dir : %s' % prod_dir)
 
     Path(prod_dir).mkdir(exist_ok=True, parents=True)
+    Path(prod_dir).chmod(0o755)
 
     # make metadata geocube
     os.chdir('merged')
