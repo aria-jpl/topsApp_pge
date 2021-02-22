@@ -1306,8 +1306,7 @@ def main():
 
     logger.info('prod_dir : %s' % prod_dir)
 
-    Path(prod_dir).mkdir(exist_ok=True, parents=True)
-    Path(prod_dir).chmod(0o755)
+    os.makedirs(prod_dir, 0o755)
 
     # make metadata geocube
     os.chdir('merged')
@@ -1340,13 +1339,7 @@ def main():
     os.chdir(cwd)
 
     # move standard product to product directory
-    # Overwrite existing dataset if needed
-    original_product_dir_path = Path(os.path.join('merged', std_prod_file))
-    product_dir_path = Path(prod_dir)
-    shutil.copytree(original_product_dir_path,
-                    product_dir_path,
-                    dirs_exist_ok=True)
-    original_product_dir_path.rmdir()
+    shutil.move(os.path.join('merged', std_prod_file), prod_dir)
 
     # generate GDAL (ENVI) headers and move to product directory
     raster_prods = (
@@ -1724,6 +1717,23 @@ def main():
 
     # update met files key to have python style naming
     md = update_met(md)
+
+    # write met json
+    logger.info('creating met file : %s' % met_file)
+    with open(met_file, 'w') as f:
+        json.dump(md, f, indent=2)
+
+    # generate dataset JSON
+    ds_file = os.path.join(prod_dir, '{}.dataset.json'.format(id))
+    logger.info('creating dataset file : %s' % ds_file)
+    create_dataset_json(id, version, met_file, ds_file)
+
+    nc_file = os.path.join(prod_dir, '{}.nc'.format(id))
+    nc_file_md5 = get_md5_from_file(nc_file)
+    nc_checksum_file = os.path.join(prod_dir, '{}.nc.md5'.format(id))
+    logger.info('nc_file_md5 : {}'.format(nc_file_md5))
+    with open(nc_checksum_file, 'w') as f:
+        f.write(nc_file_md5)
 
     # topsApp End Time
     complete_end_time = datetime.now()
