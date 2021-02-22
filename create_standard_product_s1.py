@@ -1742,30 +1742,6 @@ def main():
     complete_run_time = complete_end_time - complete_start_time
     logger.info('New TopsApp Run Time : {}'.format(complete_run_time))
 
-    # Include runtime stats in metadata file
-    md['runtime_in_seconds'] = round(complete_run_time.total_seconds(), 2)
-    root_directory = Path('.')
-    nbytes = sum(f.stat().st_size
-                 for f in root_directory.glob('**/*') if f.is_file())
-    md['scratch_disk_at_completion_bytes'] = nbytes
-
-    # write met json
-    logger.info('creating met file : %s' % met_file)
-    with open(met_file, 'w') as f:
-        json.dump(md, f, indent=2)
-
-    # generate dataset JSON
-    ds_file = os.path.join(prod_dir, '{}.dataset.json'.format(id))
-    logger.info('creating dataset file : %s' % ds_file)
-    create_dataset_json(id, version, met_file, ds_file)
-
-    nc_file = os.path.join(prod_dir, '{}.nc'.format(id))
-    nc_file_md5 = get_md5_from_file(nc_file)
-    nc_checksum_file = os.path.join(prod_dir, '{}.nc.md5'.format(id))
-    logger.info('nc_file_md5 : {}'.format(nc_file_md5))
-    with open(nc_checksum_file, 'w') as f:
-        f.write(nc_file_md5)
-
 
 def updateErrorFiles(msg):
     msg = msg.strip()
