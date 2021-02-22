@@ -18,6 +18,12 @@ This describes how to test and possibly interact with the PGE locally.
 
    `docker-compose -f <direcotry of test>/docker-compose.yaml run test`.
 
+   If this is built on a computer in which docker privileges is different than user privileges, then use the following:
+
+   `docker-compose -f coseismic_standard_product_pipeline_1/docker-compose.yaml run --user $UID:$GID test`
+
+   This ensures the mounted volume and the products are written to the user who calls the compose command (docker by default calls root).
+
 Some notes:
 
 1. the tests are run on a `region_of_interest` and using only a 1 swath. This significantly reduces the runtime to make testing quicker. See below for details.
