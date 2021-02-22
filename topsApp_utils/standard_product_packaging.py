@@ -66,25 +66,25 @@ def netdf4_dtype_check(dtype):
        10: 'CFLOAT',
        11: 'complex128',
     """
-    
+
     logger.info("testing")
 
 
 def create_group(fid,group,fid_parent=None):
     '''
-       Create a group within the fid 
+       Create a group within the fid
     '''
 
-    name = group["name"] 
+    name = group["name"]
     contents = group["content"]
-    
+
     # create a group with the provided name
     grp_id = fid.createGroup(name)
- 
-    # track the parent fid 
+
+    # track the parent fid
     if fid_parent is None:
         fid_parent = fid
-    
+
     for content in contents:
         dataset_flag = extract_key(content,"dataset")
         group_flag = extract_key(content,"group")
@@ -97,7 +97,7 @@ def create_group(fid,group,fid_parent=None):
 
 
 def python_execution(python_string,python_args=None):
-    ''' 
+    '''
         Executing a python function using a module.function string and provided arguments
     '''
     import importlib
@@ -129,7 +129,7 @@ def write_dataset(fid,data,properties_data):
         print("nothing")
     # this is either string or dataset option
     else:
-       
+
         if isinstance(data,str):
             dset = fid.createVariable(properties_data.name, str, ('matchup',), zlib=True)
             dset[0]=data
@@ -141,8 +141,8 @@ def write_dataset(fid,data,properties_data):
                 nodata = np.array(properties_data.nodata,dtype=properties_data.type)
             else:
                 nodata = None
-    
-             
+
+
             if len(properties_data.dims)==1:
                 dset = fid.createVariable(properties_data.name, properties_data.type, (properties_data.dims[0]), fill_value=nodata, zlib=True)
             elif len(properties_data.dims)==2:
@@ -159,7 +159,7 @@ def write_dataset(fid,data,properties_data):
                 for data_line in data:
                     dset[count]=data_line
                     logger.info(properties_data.name + " count = " + str(count) + '  ' + data_line)
-                   
+
                     count =+1
             else:
                 logger.info('i am a collection, not yet programmed')
@@ -213,10 +213,10 @@ def expand_attrdict(attr_dict, attr_name, attr_value):
     return attr_dict
 
 def create_dataset(fid,dataset,fid_parent=None):
-    """ 
+    """
         Creating a dataset, either a gdal readable file, or a string, or an action
     """
-    
+
     import copy
 
     name = dataset["name"]
@@ -224,7 +224,7 @@ def create_dataset(fid,dataset,fid_parent=None):
 
     # extracting the data properties
     properties_data = content_properties(dataset)
- 
+
     # Considering the different data parsing methods
     # running a python function
     if properties_data.python_action is not None:
@@ -232,7 +232,7 @@ def create_dataset(fid,dataset,fid_parent=None):
 
     # loading data from a src file
     elif properties_data.src_file is not None:
-        
+
        # loading the data
        data, data_transf, data_proj, data_nodata = data_loading(properties_data.src_file,properties_data.type,properties_data.band)
 
@@ -248,7 +248,7 @@ def create_dataset(fid,dataset,fid_parent=None):
        if properties_data.description is not None:
            data = properties_data.description
 
-    
+
     # special case to parse the connected component data
     if properties_data.name.lower()=="connected_components" or properties_data.name.lower() =="connectedcomponents" or properties_data.name.lower() =="coherence":
         # setting the no-data value in case the user is not overwriting it
@@ -267,16 +267,16 @@ def create_dataset(fid,dataset,fid_parent=None):
         # change the dataype if provided
         if properties_data.type is not None:
             # changing the format if needed
-            data = data.astype(dtype=properties_data.type) 
+            data = data.astype(dtype=properties_data.type)
 
-    # tracking if its a regular dataset, 2D geocoordinates, or 3D geocoordinates and make the CF compliance for these datasets 
+    # tracking if its a regular dataset, 2D geocoordinates, or 3D geocoordinates and make the CF compliance for these datasets
     if properties_data.name=="GEOCOOR2" or properties_data.name=="GEOCOOR3":
         # setting the coordinate system
         crs_name = properties_data.crs_name
         crs_attribute = properties_data.crs_attribute
-        
+
         # ensuring the crs is CF compliant
-        crs_attribute = CF_attribute_compliance(crs_attribute,crs_name) 
+        crs_attribute = CF_attribute_compliance(crs_attribute,crs_name)
 
         # try to see if the geo transformation and projection is passed as well
         try:
@@ -302,7 +302,7 @@ def create_dataset(fid,dataset,fid_parent=None):
         fid.createDimension(lats_dim, rows_ds)
         fid.createDimension(lons_dim, cols_ds)
 
-     
+
         # defining the lon lat datasets
         # Longitude
         properties_londata = copy.deepcopy(properties_data)
@@ -319,7 +319,7 @@ def create_dataset(fid,dataset,fid_parent=None):
         properties_latdata = copy.deepcopy(properties_data)
         #properties_latdata.name = 'latitude'
         properties_latdata.name =lats_dim
-        attr_name = ['_CoordinateAxisType','units','long_name','standard_name']  
+        attr_name = ['_CoordinateAxisType','units','long_name','standard_name']
         attr_value = ['Lat','degrees_north','latitude','latitude']
         #attr_name = ['_CoordinateAxisType','units','long_name','standard_name','bounds']
         #attr_value = ['Lat','degrees_north','latitude','latitude',lats_dim+'_bnds']
@@ -342,14 +342,14 @@ def create_dataset(fid,dataset,fid_parent=None):
             properties_hgtdata.name = hgts_dim
             attr_name = ['_CoordinateAxisType','units','long_name','standard_name','positive']
             attr_value = ['Lev','meter','height','height','up']
-            properties_hgtdata.attribute = expand_attrdict(properties_hgtdata.attribute, attr_name, attr_value)        
+            properties_hgtdata.attribute = expand_attrdict(properties_hgtdata.attribute, attr_name, attr_value)
             data_hgt = np.array(hgts)
             properties_hgtdata.dims = [hgts_dim]
             write_dataset(fid,data_hgt,properties_hgtdata)
 
     ## POLYGON NEEDS special manipulation compared to raster datasets
     elif properties_data.data_type is not None and properties_data.data_type.lower()=="polygon":
-    
+
         # number of polygons corresponds to the length of the list
         n_poly = len(data)
         # for now lets code the char to be lenth of the first poly
@@ -359,7 +359,7 @@ def create_dataset(fid,dataset,fid_parent=None):
         fid_parent.createDimension('wkt_length',n_char)
         fid_parent.createDimension('wkt_count',n_poly)
         dset = fid_parent.createVariable(name,'S1',('wkt_count','wkt_length'))
-        
+
         # formatting the string as an array of single char
         # fill data with a charakter at each postion of the polyfgon string
         for poly_i in range(n_poly):
@@ -369,13 +369,13 @@ def create_dataset(fid,dataset,fid_parent=None):
             for n in range(len(polygon_i)):
                 data_temp[n] = polygon_i[n]
             dset[poly_i] = data_temp
-        
+
         # setting the attribute
         if properties_data.attribute is not None and dset is not None:
             # for CF compliance make sure few attributes are provided
             properties_data = CF_attribute_compliance(properties_data,name)
             add_attributes(dset,properties_data.attribute)
-    
+
         # adding the crs information for the polygon
         crs_name = properties_data.crs_name
         dset2 = fid_parent.createVariable(crs_name, 'i4')
@@ -396,13 +396,13 @@ def create_dataset(fid,dataset,fid_parent=None):
                 attr_name = ['spatial_ref']
                 attr_value = [projectionRef]
                 crs_attributes = expand_attrdict(crs_attributes, attr_name, attr_value)
-            
+
             # ensuring the crs is CF compliant
             crs_attributes = CF_attribute_compliance(crs_attributes,crs_name)
-            
+
             # setting the variable
             add_attributes(dset2,crs_attributes)
-                            
+
         # setting the global attributes
         global_attribute = properties_data.global_attribute
         add_attributes(fid_parent,global_attribute)
@@ -411,21 +411,21 @@ def create_dataset(fid,dataset,fid_parent=None):
         # for CF compliance make sure few attributes are provided
         properties_data = CF_attribute_compliance(properties_data,name)
 
-        # write the dataset 
+        # write the dataset
         write_dataset(fid,data,properties_data)
 
 def CF_attribute_compliance(properties_data,name):
-    """ 
+    """
         Ensuring that few CF attributes are added
     """
-   
+
     # try to see if the attribute list is given directly or if it is part of a class
     class_flag = False
     try:
         data_attribute = properties_data.attribute
         class_flag = True
     except:
-        data_attribute = properties_data 
+        data_attribute = properties_data
 
 
     # load all current attributes
@@ -442,12 +442,12 @@ def CF_attribute_compliance(properties_data,name):
         try:
             CF_current_dict[CF_key]
         except:
-            try: 
+            try:
                 CF_missing_attr_name.append(CF_key)
                 CF_missing_attr_value.append(name)
             except:
                 pass
-    
+
     if len(CF_missing_attr_name)>0:
         if class_flag:
             properties_data.attribute = expand_attrdict(properties_data.attribute, CF_missing_attr_name, CF_missing_attr_value)
@@ -468,7 +468,7 @@ def add_attributes(fid,attributes):
             attribute_value = extract_key(attribute,"value")
             # make sure the strings are correctly encoded
             if isinstance(attribute_value, str):
-                attribute_value = attribute_value.encode('ascii')   
+                attribute_value = attribute_value.encode('ascii')
             setattr(fid, attribute_name, attribute_value)
 
 
@@ -507,9 +507,9 @@ def data_loading(filename,out_data_type=None,data_band=None):
     # getting the gdal transform and projection
     geoTrans = str(data.GetGeoTransform())
     projectionRef = str(data.GetProjection())
-    
+
     # getting the no-data value
-    try: 
+    try:
         NoData = data.GetNoDataValue()
         logger.info(NoData)
     except:
@@ -557,11 +557,11 @@ if __name__ == '__main__':
     '''
         Main driver.
     '''
-    
+
     # get config json file
     cwd = os.getcwd()
     filename = os.path.join(cwd, 'tops_groups.json')
-    
+
     # open the file
     f = open(filename)
     # read the json file with planned netcdf4 structure and put the content in a dictionary
@@ -572,7 +572,7 @@ if __name__ == '__main__':
 
     # set netcdf file
     netcdf_outfile = structure["filename"]
-    
+
     # Check for existing netcdf file
     if os.path.exists(netcdf_outfile):
         logger.info('{0} file already exists'.format(netcdf_outfile))
@@ -591,7 +591,7 @@ if __name__ == '__main__':
         logger.error(e)
         logger.error(traceback.format_exc())
         pass
- 
+
     # iterate over the different datasets
     try:
         for dataset in structure.get("dataset", []):

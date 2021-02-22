@@ -2,7 +2,6 @@ version: '2'
 services:
   test:
     image: standard_product_img
-    user: $UID:$GID
     volumes:
       - ../..:/home/ops/topsApp_pge
     command: >
