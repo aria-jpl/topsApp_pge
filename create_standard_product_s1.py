@@ -36,6 +36,8 @@ from string import Template
 from iscesys.Component.ProductManager import ProductManager as PM
 from pathlib import Path
 import zipfile
+from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search, Q
 
 gdal.UseExceptions()  # make GDAL raise python exceptions
 
@@ -45,6 +47,11 @@ BASE_PATH = os.path.dirname(__file__)
 RESORB_RE = re.compile(r'_RESORB_')
 MISSION_RE = re.compile(r'^(S1\w)_')
 POL_RE = re.compile(r'^S1\w_IW_SLC._1S(\w{2})_')
+
+# NetRC Credentials
+netrc_ob = netrc.netrc()
+ES_USERNAME, _, ES_PASSWORD = netrc_ob.authenticators('100.67.35.28')
+dem_user, _, dem_pass = netrc_ob.authenticators('urs.earthdata.nasa.gov')
 
 # topsApp Path in container
 TOPS_APP_PATH = os.environ['TOPSAPP']
@@ -71,7 +78,7 @@ with open(config_file_path) as file:
 
 # Coseismic vs. Standard Product Global Variables
 DATASET_KEY = config_data['dataset_key']
-ES_INDEX = config_data['es_index']
+ES_INDEX = DATASET_KEY.lower()
 
 # will be `coseismic` or `standard-product`
 JOB_NAME = config_data['name']
@@ -141,46 +148,6 @@ def touch(path):
         os.utime(path, None)
 
 
-def get_dataset_by_hash_version(ifg_hash, version, es_index='grq'):
-    """Query for existence of dataset by ID."""
-    uu = UrlUtils()
-    es_url = uu['GRQ_URL']
-
-    # query
-    query = {
-        'query': {
-            'bool': {
-                'must': [
-                    {'term': {'metadata.full_id_hash.raw': ifg_hash}},
-                    {'term': {'dataset.raw': DATASET_KEY}},
-                    {'term': {'version.raw': version}}
-                ]
-            }
-        }
-
-    }
-
-    logger.info(json.dumps(query, indent=2))
-
-    if es_url.endswith('/'):
-        search_url = '%s%s/_search' % (es_url, ES_INDEX)
-    else:
-        search_url = '%s/%s/_search' % (es_url, ES_INDEX)
-    logger.info(f'search_url : {search_url}')
-
-    r = requests.post(search_url, data=json.dumps(query), verify=False)
-    r.raise_for_status()
-
-    if r.status_code != 200:
-        logger.info('Failed to query %s:\n%s' % (es_url, r.text))
-        logger.info('query: %s' % json.dumps(query, indent=2))
-        logger.info('returned: %s' % r.text)
-        raise RuntimeError('Failed to query %s:\n%s' % (es_url, r.text))
-    result = r.json()
-    logger.info(result['hits']['total'])
-    return result
-
-
 def fileContainsMsg(file_name, msg):
     with open(file_name, 'r') as f:
         datafile = f.readlines()
@@ -219,13 +186,29 @@ def get_md5_from_file(file_name):
 
 
 def check_ifg_status_by_hash_version(new_ifg_hash, version):
-    es_index = 'grq_*_s1-gunw'
-    result = get_dataset_by_hash_version(new_ifg_hash, version, es_index)
-    total = result['hits']['total']
+    uu = UrlUtils()
+    es_url = uu['GRQ_URL']
+
+    grq_client = Elasticsearch(es_url,
+                               http_auth=(ES_USERNAME, ES_PASSWORD),
+                               verify_certs=False,
+                               )
+
+    s = Search(using=grq_client, index=ES_INDEX)
+
+    q = Q('bool', must=[Q('term',
+                          **{'metadata.full_id_hash.raw': new_ifg_hash}),
+                        Q('term',
+                          **{'version.raw': 'v1.0.0'})
+                        ])
+    s = s.query(q)
+    logger.info('query made to ES is:')
+    logger.info(json.dumps(s.to_dict(), indent=2))
+    total = s.count()
+
     logger.info('check_slc_status_by_hash : total : %s' % total)
     if total > 0:
-        found_id = result['hits']['hits'][0]['_id']
-        logger.info('Duplicate dataset found: %s' % found_id)
+        logger.info('Duplicate dataset for hash_id: %s' % new_ifg_hash)
         sys.exit(0)
 
     logger.info('check_slc_status : returning False')
@@ -979,10 +962,6 @@ def main():
     srtm3_dem_url = uu.get('ARIA_SRTM3_DEM_URL')
     ned1_dem_url = uu['ARIA_NED1_DEM_URL']
     ned13_dem_url = uu['ARIA_NED13_DEM_URL']
-
-    home = os.environ['HOME']
-    info = netrc.netrc(f'{home}/.netrc')
-    dem_user, _, dem_pass = info.authenticators('urs.earthdata.nasa.gov')
 
     preprocess_dem_dir = 'preprocess_dem'
     geocode_dem_dir = 'geocode_dem'
