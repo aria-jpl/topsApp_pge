@@ -199,7 +199,7 @@ def check_ifg_status_by_hash_version(new_ifg_hash, version):
     q = Q('bool', must=[Q('term',
                           **{'metadata.full_id_hash.raw': new_ifg_hash}),
                         Q('term',
-                          **{'version.raw': 'v1.0.0'})
+                          **{'version.raw': version})
                         ])
     s = s.query(q)
     logger.info('query made to ES is:')
