@@ -6,7 +6,7 @@
     "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
   },
   "recommended-queues" : [
-    "aria-standard_product-s1gunw-topsapp"
+    "s1gunw_coseismic-topsapp"
   ],
   "soft_time_limit": 7200,
   "time_limit": 7500,

@@ -6,7 +6,9 @@
     "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
   },
   "recommended-queues" : [
-    "aria-standard_product-s1gunw-topsapp"
+    "aria-standard_product-s1gunw-topsapp-Rise_Limonadi",
+    "aria-standard_product-s1gunw-topsapp-NSLCT_Bekaert",
+    "aria-standard_product-s1gunw-topsapp-ACCESS_Bekaert"
   ],
   "soft_time_limit": 7200,
   "time_limit": 7500,
