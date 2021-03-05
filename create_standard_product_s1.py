@@ -78,7 +78,7 @@ with open(config_file_path) as file:
 
 # Coseismic vs. Standard Product Global Variables
 DATASET_KEY = config_data['dataset_key']
-ES_INDEX = DATASET_KEY.lower()
+ES_INDEX = f'grq_*_{DATASET_KEY.lower()}'
 
 # will be `coseismic` or `standard-product`
 JOB_NAME = config_data['name']
@@ -944,16 +944,9 @@ def main():
     version = get_version()
 
     # get endpoint configurations
-    uu = UrlUtils()
-    es_url = uu['GRQ_URL']
-    grq_index_prefix = uu['GRQ_INDEX_PREFIX']
-    es_index = '{}_{}_s1-ifg'.format(grq_index_prefix, version)
-
-    # check if interferogram already exists
-    logger.info('GRQ url: {}'.format(es_url))
-    logger.info('GRQ index: {}'.format(es_index))
 
     # get DEM configuration
+    uu = UrlUtils()
     dem_type = ctx['dem_type']
     logger.info(f'dem_type: {dem_type}')
     dem_type_simple = None
