@@ -1,6 +1,6 @@
 {
   "submission_type": "iteration",
-  "label" : "TopsApp Coseismic PGE for S1-GUNW-COSEISMIC Interferograms",
+  "label" : "TopsApp PGE in *Coseismic* Pipeline for S1-COSEISMIC_GUNW Interferograms",
   "allowed_accounts": [ "ops" ],
   "enable_dedup": false,
   "params" : [
