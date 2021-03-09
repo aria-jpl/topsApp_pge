@@ -13,7 +13,6 @@ import traceback
 import logging
 import hashlib
 import math
-import netrc
 from subprocess import (check_call,
                         CalledProcessError)
 from glob import glob
@@ -48,10 +47,17 @@ RESORB_RE = re.compile(r'_RESORB_')
 MISSION_RE = re.compile(r'^(S1\w)_')
 POL_RE = re.compile(r'^S1\w_IW_SLC._1S(\w{2})_')
 
-# NetRC Credentials
-netrc_ob = netrc.netrc()
-ES_USERNAME, _, ES_PASSWORD = netrc_ob.authenticators('100.67.35.28')
-dem_user, _, dem_pass = netrc_ob.authenticators('urs.earthdata.nasa.gov')
+#  Read conf/settings.conf
+SETTINGS_DICT = UrlUtils()
+if 'ES_USERNAME' in SETTINGS_DICT:
+    ES_USERNAME = SETTINGS_DICT['ES_USERNAME']
+    ES_PASSWORD = SETTINGS_DICT['ES_PASSWORD']
+    HTTP_AUTH = (ES_USERNAME, ES_PASSWORD)
+else:
+    HTTP_AUTH = None
+
+dem_user = SETTINGS_DICT['ARIA_DEM_U']
+dem_pass = SETTINGS_DICT['ARIA_DEM_P']
 
 # topsApp Path in container
 TOPS_APP_PATH = os.environ['TOPSAPP']
@@ -186,11 +192,10 @@ def get_md5_from_file(file_name):
 
 
 def check_ifg_status_by_hash_version(new_ifg_hash, version):
-    uu = UrlUtils()
-    es_url = uu['GRQ_URL']
+    es_url = SETTINGS_DICT['GRQ_URL']
 
     grq_client = Elasticsearch(es_url,
-                               http_auth=(ES_USERNAME, ES_PASSWORD),
+                               http_auth=HTTP_AUTH,
                                verify_certs=False,
                                )
 
@@ -946,15 +951,14 @@ def main():
     # get endpoint configurations
 
     # get DEM configuration
-    uu = UrlUtils()
     dem_type = ctx['dem_type']
     logger.info(f'dem_type: {dem_type}')
     dem_type_simple = None
-    dem_url = uu['ARIA_DEM_URL']
+    dem_url = SETTINGS_DICT['ARIA_DEM_URL']
     # This is not in our settings currently
-    srtm3_dem_url = uu.get('ARIA_SRTM3_DEM_URL')
-    ned1_dem_url = uu['ARIA_NED1_DEM_URL']
-    ned13_dem_url = uu['ARIA_NED13_DEM_URL']
+    srtm3_dem_url = SETTINGS_DICT.get('ARIA_SRTM3_DEM_URL')
+    ned1_dem_url = SETTINGS_DICT['ARIA_NED1_DEM_URL']
+    ned13_dem_url = SETTINGS_DICT['ARIA_NED13_DEM_URL']
 
     preprocess_dem_dir = 'preprocess_dem'
     geocode_dem_dir = 'geocode_dem'
@@ -1343,7 +1347,7 @@ def main():
         fine_int_xmls.append('fine_interferogram/IW{}.xml'.format(swathnum))
 
     # get water mask configuration
-    wbd_url = uu['ARIA_WBD_URL']
+    wbd_url = SETTINGS_DICT['ARIA_WBD_URL']
 
     # get DEM bbox and add slop
     dem_S, dem_N, dem_W, dem_E = bbox
