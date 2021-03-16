@@ -110,14 +110,19 @@ machine_tag = input_metadata.get('tags', [])
 
 # If there is a machine tag, check that it's coseismic otherwise make sure it's
 # the standard product.
+# New machine tags other than "s1-coseismic-gunw" will need new control flow.
 if machine_tag:
     if not ((machine_tag[0] == "s1-coseismic-gunw")
             and (JOB_NAME == 'coseismic')):
-        raise ValueError('ifg-cfg is not from coseismic pipeline but'
-                         'a coseismic job was called')
+        exception_msg = ('TopsApp Pipelines were mixed: '
+                         'A coseismic job was called with a '
+                         'standard product ifg-cfg')
+        raise Exception(exception_msg)
 elif JOB_NAME != 'standard-product':
-    raise ValueError('The coseismic machine tag was not configured'
-                     ' and will not be processed')
+    exception_msg = ('TopsApp Pipelines were mixed: '
+                     'A standard product job was called with a '
+                     'coseismic ifg-cfg')
+    raise Exception(exception_msg)
 else:
     pass
 logger.info(f'The machine tag and job name agree for the {JOB_NAME} pipeline')
