@@ -112,7 +112,6 @@ logger.info(f'The job type is {JOB_NAME}')
 input_metadata = ctx['input_metadata']
 MACHINE_TAGS = input_metadata.get('tags', [])
 
-
 # Use the same template file and then adapt based on context.json
 TEMPLATE_FILE = (os.environ['TOPSAPP'] +
                  '/topsApp_standard_product.xml.tmpl')
