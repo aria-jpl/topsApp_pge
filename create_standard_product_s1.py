@@ -117,12 +117,12 @@ if machine_tag:
         exception_msg = ('TopsApp Pipelines were mixed: '
                          'A coseismic job was called with a '
                          'standard product ifg-cfg')
-        raise Exception(exception_msg)
+        raise RuntimeError(exception_msg)
 elif JOB_NAME != 'standard-product':
     exception_msg = ('TopsApp Pipelines were mixed: '
                      'A standard product job was called with a '
                      'coseismic ifg-cfg')
-    raise Exception(exception_msg)
+    raise RuntimeError(exception_msg)
 else:
     pass
 logger.info(f'The machine tag and job name agree for the {JOB_NAME} pipeline')
