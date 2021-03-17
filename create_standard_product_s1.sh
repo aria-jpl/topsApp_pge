@@ -16,7 +16,7 @@ echo -n "Finished running S1 Standard Coseismic Propduct interferogram generatio
 date 1>&2
 if [ $STATUS -ne 0 ]; then
   echo "Failed to run S1 Standard Coseismic Product interferogram generation." 1>&2
-  echo "# ----- errors|exception found in log -----" >> _alt_traceback.txt && grep -i "error\|exception" standard_product_s1.log >> _alt_traceback.txt
+  # echo "# ----- errors|exception found in log -----" >> _alt_traceback.txt && grep -i "error\|exception" standard_product_s1.log >> _alt_traceback.txt
   cat standard_product_s1.log 1>&2
   echo "{}"
   exit $STATUS
