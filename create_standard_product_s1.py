@@ -67,18 +67,22 @@ with open('_context.json') as file:
     ctx = json.load(file)
 
 # The job_spec_id should match the `job-{string trailing job-spec json}`
-job_spec_id, branch = ctx['job_specification']['id'].split(':')
+JOB_SPEC_ID, branch = ctx['job_specification']['id'].split(':')
 # Hysds append `job-` to id
-job_spec_id = job_spec_id.replace('job-', '')
+JOB_SPEC_ID = JOB_SPEC_ID.replace('job-', '')
 
-job_types = ['coseismic-s1gunw-topsapp',
-             'standard-product-s1gunw-topsapp']
-if job_spec_id not in job_types:
-    job_types_str = ', '.join(job_types)
-    raise ValueError('Job type not understood; must be {job_types_str}')
+ACCEPTED_JOB_TYPES = ['coseismic-s1gunw-topsapp',
+                      'standard-product-s1gunw-topsapp']
+
+# This will never happen because of job-spec and hysds-io setup.
+# Still it is instructive within PGE to illustrate we have two pipeliens
+if JOB_SPEC_ID not in ACCEPTED_JOB_TYPES:
+    job_types_str = ', '.join(ACCEPTED_JOB_TYPES)
+    raise ValueError(f'Job type {JOB_SPEC_ID} not understood; '
+                     f'must be {job_types_str}')
 
 # Open config file replacing `job-` with `config-` at the beginning
-config_file_path = f'{TOPS_APP_PATH}/conf/config-{job_spec_id}.json'
+config_file_path = f'{TOPS_APP_PATH}/conf/config-{JOB_SPEC_ID}.json'
 with open(config_file_path) as file:
     config_data = json.load(file)
 
@@ -106,26 +110,7 @@ logger.info(f'The job type is {JOB_NAME}')
 
 # Check if Coseismic Job Name Matches IFG-CFG
 input_metadata = ctx['input_metadata']
-machine_tag = input_metadata.get('tags', [])
-
-# If there is a machine tag, check that it's coseismic otherwise make sure it's
-# the standard product.
-# New machine tags other than "s1-coseismic-gunw" will need new control flow.
-if machine_tag:
-    if not ((machine_tag[0] == "s1-coseismic-gunw")
-            and (JOB_NAME == 'coseismic')):
-        exception_msg = ('TopsApp Pipelines were mixed: '
-                         'A coseismic job was called with a '
-                         'standard product ifg-cfg')
-        raise RuntimeError(exception_msg)
-elif JOB_NAME != 'standard-product':
-    exception_msg = ('TopsApp Pipelines were mixed: '
-                     'A standard product job was called with a '
-                     'coseismic ifg-cfg')
-    raise RuntimeError(exception_msg)
-else:
-    pass
-logger.info(f'The machine tag and job name agree for the {JOB_NAME} pipeline')
+MACHINE_TAGS = input_metadata.get('tags', [])
 
 
 # Use the same template file and then adapt based on context.json
@@ -778,6 +763,28 @@ def main():
     complete_start_time = datetime.now()
     logger.info('TopsApp End Time : {}'.format(complete_start_time))
     cwd = os.getcwd()
+
+    # If there is a machine tag, check that it's coseismic
+    # otherwise make sure it's
+    # the standard product.
+    # New machine tags other than "s1-coseismic-gunw"
+    # will need new control flow.
+    if MACHINE_TAGS:
+        if not ((MACHINE_TAGS[0] == "s1-coseismic-gunw")
+                and (JOB_NAME == 'coseismic')):
+            exception_msg = ('TopsApp Pipelines were mixed: '
+                             'A coseismic job was called with a '
+                             'standard product ifg-cfg')
+            raise RuntimeError(exception_msg)
+    elif JOB_NAME != 'standard-product':
+        exception_msg = ('TopsApp Pipelines were mixed: '
+                         'A standard product job was called with a '
+                         'coseismic ifg-cfg')
+        raise RuntimeError(exception_msg)
+    else:
+        pass
+    logger.info(f'The machine tag and job name agree for '
+                f'the {JOB_NAME} pipeline')
 
     input_metadata = ctx['input_metadata']
     if type(input_metadata) is list:
