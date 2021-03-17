@@ -1,16 +1,20 @@
 # Coseismic TopsApp PGE
 
-This describes how to test and possibly interact with the PGE locally.
+This describes how to test and possibly interact with the PGE locally. Note there was care taken so that these tests would as closely mirror operational runs as possible so that deploying any changes could be tested locally first.
 
 
 # Instructions for generic setup
 
-1. Navigate to the terminal to this repo.
+1. In a terminal, Navigate to this repo.
 2. `docker build -f docker/Dockerfile -t standard_product_img .` We assume this particular tag, i.e. `standard_product_img` in the tests and the other instructions. Modify at your own risk.
-3.  Write a `.netrc` in this directory with the earthdata credentials (this will be copied to the container during tests. Also use your SSO credentials and add: `machine 100.67.35.28 login USERNAME password PASSWORD macdef init`. You will also want to add these credentials to your *actual*.netrc` to download data files in case you want to download files outside a docker container.
-4. Get `settings.conf` from mozart and copy into `topsApp_pge/conf/settings.conf`. Modify as needed for local setup.
-5. Get data as instructed below.
-6. For running tests, run from the `tests` directory:
+3. Get `settings.conf` from mozart and copy into `topsApp_pge/conf/settings.conf`. You will need to add two rows related to Elastic Search credentials:
+   ```
+   ES_USERNAME=<ES_USERNAME>
+   ES_PASSWORD=<ES_PASSWORD>
+   ```
+   There may be URLS that need to be modified for local setup including the `GRQ_URL` the `:9200` should be removed in my testing. As an aside, the local and operational function of these scripts should both be handled. For example, if not `ES_USERNAME` is supplied then `None` is used for Elastic Seach queries, which will work on AWS clusters. Similarly, the `GRQ_URL` should be updated on the AWS instances as this URL will be slightly different.
+4. Get data as instructed below.
+5. For running tests, run from the `tests` directory:
 
    `docker-compose -f coseismic_standard_product_pipeline_1/docker-compose.yaml run test`
 
