@@ -85,3 +85,7 @@ celerybeat-schedule
 
 # Ignore Notebooks
 *.ipynb
+
+# ignore tests
+tests/standard_product_pipeline_3_full
+tests/standard_product_pipeline_4_full
