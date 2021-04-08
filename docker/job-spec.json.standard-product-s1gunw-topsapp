@@ -11,8 +11,8 @@
     "aria-standard_product-s1gunw-topsapp-NSLCT_Bekaert",
     "aria-standard_product-s1gunw-topsapp-ACCESS_Bekaert"
   ],
-  "soft_time_limit": 8400,
-  "time_limit": 8700,
+  "soft_time_limit": 9000,
+  "time_limit": 9300,
   "disk_usage":"200GB",
   "post": [ "hysds.utils.triage" ],
   "params" : [
