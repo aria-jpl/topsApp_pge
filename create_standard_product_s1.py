@@ -180,33 +180,55 @@ def get_md5_from_file(file_name):
     return hash_md5.hexdigest()
 
 
-def check_ifg_status_by_hash_version(new_ifg_hash, version):
-    es_url = SETTINGS_DICT['GRQ_URL']
+def update_str(item: str) -> str:
+    return r'"' + item + r'"'
 
+
+def get_gunw_query(reference_scenes: list,
+                   secondary_scenes: list,
+                   version: str):
+    reference_scenes_ = list(map(update_str, reference_scenes))
+    secondary_scenes_ = list(map(update_str, secondary_scenes))
+
+    reference_matches = [Q('query_string',
+                           query=scene,
+                           default_field="metadata.reference_scenes")
+                         for scene in reference_scenes_]
+    secondary_matches = [Q('query_string',
+                           query=scene,
+                           default_field="metadata.secondary_scenes")
+                         for scene in secondary_scenes_]
+    version_match = [Q('query_string',
+                       query=version[:3],
+                       default_field="version")]
+    qq = Q('bool', must=(reference_matches +
+                         secondary_matches +
+                         version_match))
+    return qq
+
+
+def check_for_existing_gunw(reference_scenes: list,
+                            secondary_scenes: list,
+                            version: str) -> bool:
+    es_url = SETTINGS_DICT['GRQ_URL']
     grq_client = Elasticsearch(es_url,
                                http_auth=HTTP_AUTH,
                                verify_certs=False,
                                )
 
-    s = Search(using=grq_client, index=ES_INDEX)
+    search = Search(using=grq_client, index=ES_INDEX)
 
-    q = Q('bool', must=[Q('term',
-                          **{'metadata.full_id_hash.raw': new_ifg_hash}),
-                        Q('query_string',
-                          query=version[:3],
-                          default_field="version"),
-                        ])
-    s = s.query(q)
-    logger.info('query made to ES is:')
+    query = get_gunw_query(reference_scenes, secondary_scenes, version)
+    s = search.query(query)
+
     logger.info(json.dumps(s.to_dict(), indent=2))
+
     total = s.count()
-
-    logger.info('check_slc_status_by_hash : total : %s' % total)
     if total > 0:
-        logger.info('Duplicate dataset for hash_id: %s' % new_ifg_hash)
-        sys.exit(0)
-
-    logger.info('check_slc_status : returning False')
+        logger.info(f'GUNW with reference scenes{",".join(reference_scenes)} '
+                    f' and secondary scenes {",".join(secondary_scenes)} '
+                    f'and version {version[:3]}* exists')
+        return True
     return False
 
 
@@ -908,18 +930,17 @@ def main():
 
     # Check if ifg_name exists
     version = get_version()
-    temp_ifg_id = get_temp_id(ctx, version)
 
     TESTING = ctx.get('testing', False)
     if not TESTING:
-        if check_ifg_status_by_hash_version(new_ifg_hash, get_version()):
-            err = "S1-GUNW IFG Found : %s" % temp_ifg_id
-            logger.info(err)
-            raise RuntimeError(err)
+        if check_for_existing_gunw(master_ids,
+                                   slave_ids,
+                                   version):
+            raise RuntimeError("Duplicate S1 GUNW found")
 
         logger.info('\n'
-                    f'{DATASET_KEY} ifg cfg NOT Found:'
-                    f'{temp_ifg_id}.\nProceeding ....\n')
+                    f'{DATASET_KEY} duplicate NOT Found.\n'
+                    f'Proceeding ....\n')
 
     logger.debug('Warning: We assume that the zip paths are '
                  'in the current working directory with the other data')
