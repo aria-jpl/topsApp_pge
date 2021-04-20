@@ -6,10 +6,10 @@
     "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
   },
   "recommended-queues" : [
-    "s1gunw_coseismic-topsapp"
+    "s1gunw_coseismic-topsapp-pleiades_s2037"
   ],
-  "soft_time_limit": 7200,
-  "time_limit": 7500,
+  "soft_time_limit": 43200,
+  "time_limit": 43200,
   "disk_usage":"200GB",
   "post": [ "hysds.utils.triage" ],
   "params" : [

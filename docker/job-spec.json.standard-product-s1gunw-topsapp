@@ -6,13 +6,10 @@
     "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
   },
   "recommended-queues" : [
-    "aria-standard_product-s1gunw-topsapp-Rise_Limonadi",
-    "aria-standard_product-s1gunw-topsapp-Volcano_Lundgren",
-    "aria-standard_product-s1gunw-topsapp-NSLCT_Bekaert",
-    "aria-standard_product-s1gunw-topsapp-ACCESS_Bekaert"
+    "new_aria-standard_product-s1gunw-topsapp-pleiades_s2037"
   ],
-  "soft_time_limit": 7200,
-  "time_limit": 7500,
+  "soft_time_limit": 43200,
+  "time_limit": 43200,
   "disk_usage":"200GB",
   "post": [ "hysds.utils.triage" ],
   "params" : [

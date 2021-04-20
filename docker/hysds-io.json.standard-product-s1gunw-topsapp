@@ -1,6 +1,6 @@
 {
   "submission_type": "iteration",
-  "label" : "TopsApp PGE in *Standard-Product* Pipeline for S1-GUNW Interferograms",
+  "label" : "TopsApp PGE in *Standard-Product* Pipeline for S1-GUNW Interferograms - singularity",
   "allowed_accounts": [ "ops" ],
   "enable_dedup": false,
   "params" : [
@@ -8,13 +8,19 @@
       "name": "dataset_tag",
       "from": "submitter",
       "type": "text",
-      "default": "s1-gunw-standard-product",
+      "default": "ondemand-s1gunw,pleiades",
       "placeholder": "A value to append to the dataset identifier"
     },
     {
       "name": "input_metadata",
       "type": "text",
       "from": "dataset_jpath:_source.metadata"
+    },
+    {
+      "name": "request_id",
+      "type": "text",
+      "default": "UNKNOWN",
+      "from": "dataset_jpath:_source.metadata.request_metadata.objectid"
     },
     {
      "name":"localize_products",
