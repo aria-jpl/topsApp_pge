@@ -769,8 +769,7 @@ def main():
     # New machine tags other than "s1-coseismic-gunw"
     # will need new control flow.
     if MACHINE_TAGS:
-        if not ((MACHINE_TAGS[0] == "s1-coseismic-gunw")
-                and (JOB_NAME == 'coseismic')):
+        if ('coseismic' in MACHINE_TAGS[0]) or (JOB_NAME == 'coseismic'):
             exception_msg = ('TopsApp Pipelines were mixed: '
                              'A coseismic job was called with a '
                              'standard product ifg-cfg')
