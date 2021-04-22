@@ -1,0 +1,585 @@
+{
+  "local_test": true,
+  "_command": "/home/ops/topsApp_pge/create_standard_product_s1.sh",
+  "_disk_usage": "200GB",
+  "_prov": {
+    "wasDerivedFrom": [
+      "url:http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF",
+      "url:http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+    ],
+    "wasGeneratedBy": "task_id:1c09e363-b019-4dd6-b6cd-7e3b74cf86e4"
+  },
+  "container_image_id": "sha256:35d1d0751d368ae744e96f8dfdc8a83c26f0fc2ea93ff26e4b2862523350d239",
+  "container_image_name": "container-aria-jpl_topsapp_pge:develop",
+  "container_image_url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_topsapp_pge:develop.tar.gz",
+  "container_mappings": {
+    "/home/ops/.aws": [
+      "/home/ops/.aws",
+      "ro"
+    ],
+    "/home/ops/.netrc": [
+      "/home/ops/.netrc"
+    ],
+    "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
+  },
+  "container_specification": {
+    "digest": "sha256:35d1d0751d368ae744e96f8dfdc8a83c26f0fc2ea93ff26e4b2862523350d239",
+    "id": "container-aria-jpl_topsapp_pge:develop",
+    "url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_topsapp_pge:develop.tar.gz",
+    "version": "develop"
+  },
+  "dataset_tag": "s1-gunw-standard-product,aws,standard_product,Rise_Limonadi",
+  "input_metadata": {
+    "_disk_usage": "100GB",
+    "auto_bbox": "true",
+    "azimuth_looks": 7,
+    "bbox": [
+      [
+        40.673759,
+        -79.26206223330122
+      ],
+      [
+        40.673759,
+        -75.94428307462175
+      ],
+      [
+        38.655983,
+        -75.94428307462175
+      ],
+      [
+        38.655983,
+        -79.26206223330122
+      ]
+    ],
+    "context": {},
+    "dem_type": "Ned1",
+    "direction": "asc",
+    "endtime": "2018-08-21T23:07:32",
+    "filter_strength": 0.5,
+    "full_id_hash": "b761872e9da14f0a46a2ca8359a95eb1",
+    "id": "S1-GUNW-ifg-cfg-RM-M1S3-TN004-20180821T230732-20180716T230638-poeorb-b761",
+    "id_hash": "b761",
+    "localize_urls": [
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF"
+      },
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+      }
+    ],
+    "master_acquisitions": [
+      "acquisition-S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6-esa_scihub"
+    ],
+    "master_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF",
+    "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF",
+    "master_scenes": [
+      "S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6"
+    ],
+    "master_zip_file": [
+      "S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+    ],
+    "master_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+    ],
+    "orbitNumber": [
+      22826,
+      23351
+    ],
+    "platform": "Sentinel-1A",
+    "precise_orbit_only": "true",
+    "priority": 5,
+    "project": [
+      "grfn"
+    ],
+    "range_looks": 19,
+    "slave_acquisitions": [
+      "acquisition-S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4-esa_scihub",
+      "acquisition-S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480-esa_scihub",
+      "acquisition-S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07-esa_scihub"
+    ],
+    "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF",
+    "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF",
+    "slave_scenes": [
+      "S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4",
+      "S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480",
+      "S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07"
+    ],
+    "slave_zip_file": [
+      "S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip",
+      "S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip",
+      "S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+    ],
+    "slave_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip",
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip",
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+    ],
+    "slc_master_dt": "20180821T230732",
+    "slc_slave_dt": "20180716T230638",
+    "soft_time_limit": 86400,
+    "starttime": "2018-07-16T23:06:38",
+    "time_limit": 86700,
+    "track_number": 4,
+    "union_geojson": {
+      "coordinates": [
+        [
+          [
+            -79.26206223330122,
+            40.274958240917144
+          ],
+          [
+            -76.280769,
+            40.673759
+          ],
+          [
+            -75.94428307462175,
+            39.056298050708214
+          ],
+          [
+            -75.9459521414899,
+            39.056068755420355
+          ],
+          [
+            -75.94585328362389,
+            39.055587521404135
+          ],
+          [
+            -78.854416,
+            38.655983
+          ],
+          [
+            -78.88669258021625,
+            38.784016595669534
+          ],
+          [
+            -78.88623579919032,
+            38.78407922786906
+          ],
+          [
+            -79.26206223330122,
+            40.274958240917144
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    }
+  },
+  "job_priority": 0,
+  "job_specification": {
+    "command": "/home/ops/topsApp_pge/create_standard_product_s1.sh",
+    "container": "container-aria-jpl_topsapp_pge:develop",
+    "disk_usage": "200GB",
+    "id": "job-standard-product-s1gunw-topsapp:develop",
+    "imported_worker_files": {
+      "/home/ops/.aws": [
+        "/home/ops/.aws",
+        "ro"
+      ],
+      "/home/ops/.netrc": [
+        "/home/ops/.netrc"
+      ],
+      "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
+    },
+    "job-version": "develop",
+    "params": [
+      {
+        "destination": "context",
+        "name": "dataset_tag",
+        "value": "s1-gunw-standard-product,aws,standard_product,Rise_Limonadi"
+      },
+      {
+        "destination": "context",
+        "name": "input_metadata",
+        "value": {
+          "_disk_usage": "100GB",
+          "auto_bbox": "true",
+          "azimuth_looks": 7,
+          "bbox": [
+            [
+              40.673759,
+              -79.26206223330122
+            ],
+            [
+              40.673759,
+              -75.94428307462175
+            ],
+            [
+              38.655983,
+              -75.94428307462175
+            ],
+            [
+              38.655983,
+              -79.26206223330122
+            ]
+          ],
+          "context": {},
+          "dem_type": "Ned1",
+          "direction": "asc",
+          "endtime": "2018-08-21T23:07:32",
+          "filter_strength": 0.5,
+          "full_id_hash": "b761872e9da14f0a46a2ca8359a95eb1",
+          "id": "S1-GUNW-ifg-cfg-RM-M1S3-TN004-20180821T230732-20180716T230638-poeorb-b761",
+          "id_hash": "b761",
+          "localize_urls": [
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF"
+            },
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+            }
+          ],
+          "master_acquisitions": [
+            "acquisition-S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6-esa_scihub"
+          ],
+          "master_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF",
+          "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF",
+          "master_scenes": [
+            "S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6"
+          ],
+          "master_zip_file": [
+            "S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+          ],
+          "master_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+          ],
+          "orbitNumber": [
+            22826,
+            23351
+          ],
+          "platform": "Sentinel-1A",
+          "precise_orbit_only": "true",
+          "priority": 5,
+          "project": [
+            "grfn"
+          ],
+          "range_looks": 19,
+          "slave_acquisitions": [
+            "acquisition-S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4-esa_scihub",
+            "acquisition-S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480-esa_scihub",
+            "acquisition-S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07-esa_scihub"
+          ],
+          "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF",
+          "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF",
+          "slave_scenes": [
+            "S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4",
+            "S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480",
+            "S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07"
+          ],
+          "slave_zip_file": [
+            "S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip",
+            "S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip",
+            "S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+          ],
+          "slave_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip",
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip",
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+          ],
+          "slc_master_dt": "20180821T230732",
+          "slc_slave_dt": "20180716T230638",
+          "soft_time_limit": 86400,
+          "starttime": "2018-07-16T23:06:38",
+          "time_limit": 86700,
+          "track_number": 4,
+          "union_geojson": {
+            "coordinates": [
+              [
+                [
+                  -79.26206223330122,
+                  40.274958240917144
+                ],
+                [
+                  -76.280769,
+                  40.673759
+                ],
+                [
+                  -75.94428307462175,
+                  39.056298050708214
+                ],
+                [
+                  -75.9459521414899,
+                  39.056068755420355
+                ],
+                [
+                  -75.94585328362389,
+                  39.055587521404135
+                ],
+                [
+                  -78.854416,
+                  38.655983
+                ],
+                [
+                  -78.88669258021625,
+                  38.784016595669534
+                ],
+                [
+                  -78.88623579919032,
+                  38.78407922786906
+                ],
+                [
+                  -79.26206223330122,
+                  40.274958240917144
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          }
+        }
+      },
+      {
+        "destination": "localize",
+        "name": "localize_products",
+        "value": [
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF"
+          },
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+          }
+        ]
+      },
+      {
+        "destination": "context",
+        "name": "query",
+        "value": {
+          "query": {
+            "filtered": {
+              "filter": {
+                "and": [
+                  {
+                    "term": {
+                      "system_version.raw": "v2.0.0"
+                    }
+                  },
+                  {
+                    "ids": {
+                      "values": [
+                        "S1-GUNW-ifg-cfg-RM-M1S3-TN004-20180821T230732-20180716T230638-poeorb-b761"
+                      ]
+                    }
+                  },
+                  {
+                    "geo_shape": {
+                      "location": {
+                        "shape": {
+                          "coordinates": [
+                            [
+                              [
+                                -77.76515431734721,
+                                34.22508014171398
+                              ],
+                              [
+                                -75.07037017370219,
+                                34.64269977464096
+                              ],
+                              [
+                                -77.0044026396551,
+                                43.92898440224408
+                              ],
+                              [
+                                -80.03505796282847,
+                                43.58746188337628
+                              ],
+                              [
+                                -80.05958211460617,
+                                43.58644944121685
+                              ],
+                              [
+                                -77.76515431734721,
+                                34.22508014171398
+                              ]
+                            ]
+                          ],
+                          "type": "polygon"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "query": {
+                "bool": {
+                  "must": [
+                    {
+                      "term": {
+                        "dataset.raw": "S1-GUNW-ifg-cfg"
+                      }
+                    },
+                    {
+                      "query_string": {
+                        "default_operator": "OR",
+                        "query": "metadata.track_number:004"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "destination": "context",
+        "name": "name",
+        "value": "AOI_monitoring_us_east_coast_tn004-topsapp"
+      },
+      {
+        "destination": "context",
+        "name": "username",
+        "value": "hysdsops"
+      }
+    ],
+    "post": [
+      "hysds.utils.triage"
+    ],
+    "recommended-queues": [
+      "aria-standard_product-s1gunw-topsapp-Rise_Limonadi",
+      "aria-standard_product-s1gunw-topsapp-Volcano_Lundgren",
+      "aria-standard_product-s1gunw-topsapp-NSLCT_Bekaert",
+      "aria-standard_product-s1gunw-topsapp-ACCESS_Bekaert"
+    ],
+    "resource": "jobspec",
+    "soft_time_limit": 7200,
+    "time_limit": 7500
+  },
+  "localize_urls": [
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/09/10/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180910T121045_V20180820T225942_20180822T005942.EOF"
+    },
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2018/08/05/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20180805T120700_V20180715T225942_20180717T005942.EOF"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/08/21/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6/S1A_IW_SLC__1SDV_20180821T230705_20180821T230732_023351_028A3E_ABD6.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4/S1A_IW_SLC__1SDV_20180716T230638_20180716T230705_022826_027995_EED4.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480/S1A_IW_SLC__1SDV_20180716T230703_20180716T230730_022826_027995_1480.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2018/07/16/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07/S1A_IW_SLC__1SDV_20180716T230728_20180716T230755_022826_027995_AB07.zip"
+    }
+  ],
+  "name": "AOI_monitoring_us_east_coast_tn004-topsapp",
+  "query": {
+    "query": {
+      "filtered": {
+        "filter": {
+          "and": [
+            {
+              "term": {
+                "system_version.raw": "v2.0.0"
+              }
+            },
+            {
+              "ids": {
+                "values": [
+                  "S1-GUNW-ifg-cfg-RM-M1S3-TN004-20180821T230732-20180716T230638-poeorb-b761"
+                ]
+              }
+            },
+            {
+              "geo_shape": {
+                "location": {
+                  "shape": {
+                    "coordinates": [
+                      [
+                        [
+                          -77.76515431734721,
+                          34.22508014171398
+                        ],
+                        [
+                          -75.07037017370219,
+                          34.64269977464096
+                        ],
+                        [
+                          -77.0044026396551,
+                          43.92898440224408
+                        ],
+                        [
+                          -80.03505796282847,
+                          43.58746188337628
+                        ],
+                        [
+                          -80.05958211460617,
+                          43.58644944121685
+                        ],
+                        [
+                          -77.76515431734721,
+                          34.22508014171398
+                        ]
+                      ]
+                    ],
+                    "type": "polygon"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "dataset.raw": "S1-GUNW-ifg-cfg"
+                }
+              },
+              {
+                "query_string": {
+                  "default_operator": "OR",
+                  "query": "metadata.track_number:004"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "runtime_options": {},
+  "tag": "AOI_monitoring_us_east_coast_tn004-topsapp",
+  "username": "hysdsops"
+}
