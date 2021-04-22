@@ -211,24 +211,45 @@ def check_for_existing_gunw(reference_scenes: list,
                             secondary_scenes: list,
                             version: str) -> bool:
     es_url = SETTINGS_DICT['GRQ_URL']
+
+    # For local tests
+    LOCAL_TEST = ctx.get('local_test', False)
+    if LOCAL_TEST:
+        es_url = es_url + '/es'
+
     grq_client = Elasticsearch(es_url,
                                http_auth=HTTP_AUTH,
                                verify_certs=False,
                                )
 
+    logger.info(grq_client)
     search = Search(using=grq_client, index=ES_INDEX)
 
     query = get_gunw_query(reference_scenes, secondary_scenes, version)
     s = search.query(query)
-
     logger.info(json.dumps(s.to_dict(), indent=2))
 
-    total = s.count()
-    if total > 0:
-        logger.info(f'GUNW with reference scenes{",".join(reference_scenes)} '
-                    f' and secondary scenes {",".join(secondary_scenes)} '
-                    f'and version {version[:3]}* exists')
-        return True
+    response = s.execute()
+    hits = response.hits
+
+    if hits:
+        # Ensure set equality
+        response = s.execute()
+        hits = response.hits
+
+        def ensure_consistent_scene_length(hit):
+            ref_consistent = (len(reference_scenes) ==
+                              len(hit['metadata']['reference_scenes']))
+            sec_consistent = (len(secondary_scenes) ==
+                              len(hit['metadata']['secondary_scenes']))
+            return sec_consistent and ref_consistent
+
+        hits = list(filter(ensure_consistent_scene_length, hits))
+        if hits:
+            logger.info(f'GUNW with ref scenes{",".join(reference_scenes)} '
+                        f' and sec scenes {",".join(secondary_scenes)} '
+                        f'and version {version[:3]}* exists')
+            return True
     return False
 
 
