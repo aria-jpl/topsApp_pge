@@ -89,5 +89,5 @@ celerybeat-schedule
 !tests/_notebooks/0_Breakpoint_Example.ipynb
 
 # ignore tests
-tests/standard_product_pipeline_3_full
 tests/standard_product_pipeline_4_full
+tests/standard_product_pipeline_5_full
