@@ -5,7 +5,6 @@ services:
     volumes:
       - ../..:/home/ops/topsApp_pge
     command: >
-             bash -c "yes | cp -rf /home/ops/topsApp_pge/.netrc /home/ops/.netrc
-             && cd /home/ops/topsApp_pge/tests/coseismic_standard_product_pipeline_1_full
+             bash -c "cd /home/ops/topsApp_pge/tests/coseismic_standard_product_pipeline_1_full
              && source symbolic_link_data_1.sh
              && /home/ops/topsApp_pge/create_standard_product_s1.sh"
