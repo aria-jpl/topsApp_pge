@@ -21,6 +21,8 @@ The best way to build the image for this PGE is via the Dockerfile. Specifically
 
 See the testing section for more details on how to test and interact with the code. Note that the [context](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#understand-build-context) of the `docker build` must be this repo.
 
+April, 2021: An update to elasticssearch using `pip`. There are warnings/Errors because this is incompatible with mozart and hysds-core. Fortunately, I don't use these tools within this PGE.
+
 ## Reference for TopsApp
 
 TopsApp takes in SLC data from Sentinel-1 and runs the [TopsApp](https://github.com/isce-framework/isce2-docs/blob/master/Notebooks/UNAVCO_2020/TOPS/topsApp.ipynb) from ISCE2 automatically. See the linked notebook for a description of the algorithm and how to use this ISCE2 processing outside of the PGE.
