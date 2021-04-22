@@ -13,8 +13,13 @@ This describes how to test and possibly interact with the PGE locally. Note ther
    ES_PASSWORD=<ES_PASSWORD>
    ```
    There may be URLS that need to be modified for local setup including the `GRQ_URL` the `:9200` should be removed in my testing. As an aside, the local and operational function of these scripts should both be handled. For example, if not `ES_USERNAME` is supplied then `None` is used for Elastic Seach queries, which will work on AWS clusters. Similarly, the `GRQ_URL` should be updated on the AWS instances as this URL will be slightly different.
-4. Get data as instructed below.
-5. For running tests, run from the `tests` directory:
+4. Create a netrc in topsApp repo with (unfortunately we use two different libraries for accessing elastics search):
+   ```
+   machine 100.67.35.28 login <USER> password <PSWRD>
+   macdef init
+   ```
+5. Get data as instructed below.
+6. For running tests, run from the `tests` directory:
 
    `docker-compose -f coseismic_standard_product_pipeline_1/docker-compose.yaml run test`
 
