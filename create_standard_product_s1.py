@@ -1078,11 +1078,20 @@ def main():
     geocode_dem_dir = os.path.join(preprocess_dem_dir,
                                    f'Coarse_{dem_type_simple}_preprocess_dem')
     create_dir(geocode_dem_dir)
+
+    """ XXXXXX change to calling a shell wrapper
     dem_cmd = [
         '{}/applications/downsampleDEM.py'.format(os.environ['ISCE_HOME']),
         '-i',
         '{}'.format(preprocess_vrt_file), '-rsec', '3'
     ]
+    """
+
+    dem_cmd = [
+        '{}/call_downsampledem.sh'.format(os.environ['TOPSAPP']),
+        '{}'.format(preprocess_vrt_file)
+    ]
+
     dem_cmd_line = ' '.join(dem_cmd)
     logger.info('Calling downsampleDEM.py: {}'.format(dem_cmd_line))
     check_call(dem_cmd_line, shell=True)
