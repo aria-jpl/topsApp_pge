@@ -74,8 +74,11 @@ def get_active_ids(es_url):
     else:
         search_url = '%s/%s/_search' % (es_url, es_index)
     # Update for local runs because operational runs specify ports
+    # comment out cause port number does not cause "es" to be inserted into url
+    """
     if ':9200' not in search_url:
         search_url = '%s/es/%s/_search' % (es_url, es_index)
+    """
     r = requests.post(search_url, data=json.dumps(query), verify=False)
     if r.status_code == 200:
         result = r.json()
@@ -110,8 +113,11 @@ def get_cal_url(id, es_url):
     else:
         search_url = '%s/%s/_search' % (es_url, es_index)
     # Update for local runs because operational runs specify ports
+    # comment out cause port number does not cause "es" to be inserted into url
+    """
     if ':9200' not in search_url:
         search_url = f'{es_url}/es/_search'
+    """
     r = requests.post(search_url, data=json.dumps(query), verify=False)
     if r.status_code == 200:
         result = r.json()
