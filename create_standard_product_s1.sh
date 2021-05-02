@@ -3,6 +3,7 @@ export TOPSAPP="/home/ops/topsApp_pge"
 source /opt/isce2/isce_env.sh
 export PYTHONPATH="$ISCE_HOME/applications:$ISCE_HOME/components:$TOPSAPP:$PYTHONPATH"
 export OMP_NUM_THREADS=16
+export PROJ_LIB="/opt/conda/share/proj"
 
 # source environment
 source $HOME/verdi/bin/activate
