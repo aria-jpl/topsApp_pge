@@ -1088,6 +1088,7 @@ def main():
     """
 
     dem_cmd = [
+        'sh',
         '{}/call_downsampledem.sh'.format(os.environ['TOPSAPP']),
         '{}'.format(preprocess_vrt_file)
     ]
