@@ -1302,7 +1302,8 @@ def main():
 
     logger.info('prod_dir : %s' % prod_dir)
 
-    os.makedirs(prod_dir, 0o755)
+    if not os.path.isdir(prod_dir):
+      os.makedirs(prod_dir, 0o755)
 
     # make metadata geocube
     os.chdir('merged')
