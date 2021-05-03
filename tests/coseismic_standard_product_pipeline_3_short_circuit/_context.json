@@ -1,0 +1,972 @@
+{
+  "local_test": true,
+  "_command": "/home/ops/topsApp_pge/create_standard_product_s1.sh",
+  "_disk_usage": "200GB",
+  "_prov": {
+    "wasDerivedFrom": [
+      "url:http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF",
+      "url:http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip",
+      "url:s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+    ],
+    "wasGeneratedBy": "task_id:876ea574-f20a-4866-b2bb-474449ad0e05"
+  },
+  "container_image_id": "sha256:9a6d26a4162fdad4565bd88b8a47fc65d8bb012dc50705cb9c4208823b007e57",
+  "container_image_name": "container-aria-jpl_topsapp_pge:develop",
+  "container_image_url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_topsapp_pge:develop.tar.gz",
+  "container_mappings": {
+    "/home/ops/.aws": [
+      "/home/ops/.aws",
+      "ro"
+    ],
+    "/home/ops/.netrc": [
+      "/home/ops/.netrc"
+    ],
+    "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
+  },
+  "container_specification": {
+    "digest": "sha256:9a6d26a4162fdad4565bd88b8a47fc65d8bb012dc50705cb9c4208823b007e57",
+    "id": "container-aria-jpl_topsapp_pge:develop",
+    "url": "s3://s3-us-west-2.amazonaws.com/aria-dev-cc-fwd-torresal/container-aria-jpl_topsapp_pge:develop.tar.gz",
+    "version": "develop"
+  },
+  "dataset_tag": "standard_coseismic_product_gunw1_triggered",
+  "input_metadata": {
+    "_disk_usage": "100GB",
+    "auto_bbox": "true",
+    "azimuth_looks": 7,
+    "context": {},
+    "dem_type": "SRTM+v3",
+    "direction": "asc",
+    "endtime": "2021-02-18T16:32:29.519Z",
+    "filter_strength": 0.5,
+    "full_id_hash": "2e5c473348ad16b2930b9230c38212bb",
+    "id": "S1-GUNW-ifg-cfg-RM-M1S1-TN175-20210218T163229-20210206T163203-poeorb-2e5c",
+    "id_hash": "2e5c",
+    "localize_urls": [
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF"
+      },
+      {
+        "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+      },
+      {
+        "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+      }
+    ],
+    "master_acquisitions": [
+      "acquisition-S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E-esa_scihub"
+    ],
+    "master_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF",
+    "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF",
+    "master_scenes": [
+      "S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E"
+    ],
+    "master_zip_file": [
+      "S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+    ],
+    "master_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+    ],
+    "orbitNumber": [],
+    "platform": "",
+    "precise_orbit_only": "true",
+    "priority": 3,
+    "project": [
+      3
+    ],
+    "range_looks": 19,
+    "slave_acquisitions": [
+      "acquisition-S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14-esa_scihub"
+    ],
+    "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF",
+    "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF",
+    "slave_scenes": [
+      "S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14"
+    ],
+    "slave_zip_file": [
+      "S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+    ],
+    "slave_zip_url": [
+      "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+    ],
+    "slc_master_dt": "20210218T163229",
+    "slc_slave_dt": "20210206T163203",
+    "soft_time_limit": 86400,
+    "starttime": "2021-02-06T16:32:03.003Z",
+    "tags": [
+      "s1-coseismic-gunw"
+    ],
+    "time_limit": 86700,
+    "track_number": 175,
+    "union_geojson": {
+      "coordinates": [
+        [
+          [
+            20.497902596112795,
+            36.22624502206543
+          ],
+          [
+            20.497082,
+            36.226128
+          ],
+          [
+            20.497052850798955,
+            36.2262480729524
+          ],
+          [
+            20.49626,
+            36.226135
+          ],
+          [
+            20.49604189255191,
+            36.22703337220262
+          ],
+          [
+            20.495226,
+            36.226917
+          ],
+          [
+            20.360801301162937,
+            36.78051268263032
+          ],
+          [
+            20.358002,
+            36.780117
+          ],
+          [
+            20.357975208284532,
+            36.78022645414472
+          ],
+          [
+            20.357201,
+            36.780117
+          ],
+          [
+            20.357123496057486,
+            36.780433580797485
+          ],
+          [
+            20.356504,
+            36.780346
+          ],
+          [
+            20.356503219500183,
+            36.78034918816631
+          ],
+          [
+            20.346258,
+            36.7789
+          ],
+          [
+            20.346204836421297,
+            36.779117019776244
+          ],
+          [
+            20.346127,
+            36.779106
+          ],
+          [
+            20.34604569431683,
+            36.77943789359558
+          ],
+          [
+            20.345213,
+            36.77932
+          ],
+          [
+            19.948029,
+            38.400558
+          ],
+          [
+            19.948262085375582,
+            38.400590149207765
+          ],
+          [
+            19.948195,
+            38.400864
+          ],
+          [
+            19.94889294089046,
+            38.40096025481108
+          ],
+          [
+            19.948881,
+            38.401009
+          ],
+          [
+            19.949591356726586,
+            38.401106875713516
+          ],
+          [
+            19.561075,
+            39.950703
+          ],
+          [
+            19.561952538038142,
+            39.95082097782191
+          ],
+          [
+            19.561941,
+            39.950867
+          ],
+          [
+            19.562033412046425,
+            39.9508794235486
+          ],
+          [
+            19.562027,
+            39.950905
+          ],
+          [
+            19.562027570998694,
+            39.95090507668513
+          ],
+          [
+            19.561995,
+            39.951035
+          ],
+          [
+            19.563332482366885,
+            39.9512146163071
+          ],
+          [
+            19.563284,
+            39.951408
+          ],
+          [
+            19.563778872879176,
+            39.95147445620236
+          ],
+          [
+            19.563694,
+            39.951813
+          ],
+          [
+            19.563908425492567,
+            39.95184179451716
+          ],
+          [
+            19.563864,
+            39.952019
+          ],
+          [
+            19.565096894273836,
+            39.95218456312773
+          ],
+          [
+            19.565084,
+            39.952236
+          ],
+          [
+            22.137734069330524,
+            40.29767948121924
+          ],
+          [
+            22.544201,
+            40.352318
+          ],
+          [
+            22.544213102092183,
+            40.35225959446269
+          ],
+          [
+            22.574877,
+            40.356377
+          ],
+          [
+            22.574886386930892,
+            40.35633159971258
+          ],
+          [
+            22.575083,
+            40.356358
+          ],
+          [
+            22.575184317000712,
+            40.35586796563006
+          ],
+          [
+            22.575624,
+            40.355927
+          ],
+          [
+            22.575648323717644,
+            40.35580934580715
+          ],
+          [
+            22.575899,
+            40.355843
+          ],
+          [
+            22.5760246894771,
+            40.355234963311105
+          ],
+          [
+            22.576092,
+            40.355244
+          ],
+          [
+            22.57610552804576,
+            40.35517855545652
+          ],
+          [
+            22.576593,
+            40.355244
+          ],
+          [
+            22.70291598159935,
+            39.74413168906233
+          ],
+          [
+            22.706696,
+            39.744644
+          ],
+          [
+            22.706780997055045,
+            39.74423074284519
+          ],
+          [
+            22.707661,
+            39.74435
+          ],
+          [
+            22.70769008938612,
+            39.74420855204582
+          ],
+          [
+            22.708483,
+            39.744316
+          ],
+          [
+            22.708491809752726,
+            39.74427315864804
+          ],
+          [
+            22.709177,
+            39.744366
+          ],
+          [
+            22.709267160034887,
+            39.74392749866955
+          ],
+          [
+            22.709293,
+            39.743931
+          ],
+          [
+            23.042519,
+            38.123249
+          ],
+          [
+            23.041636255327603,
+            38.12312616179715
+          ],
+          [
+            23.041655,
+            38.123035
+          ],
+          [
+            23.041177333066166,
+            38.12296852747707
+          ],
+          [
+            23.3444,
+            36.631191
+          ],
+          [
+            21.004466759701057,
+            36.29764026229355
+          ],
+          [
+            20.504539,
+            36.226368
+          ],
+          [
+            20.504476795092135,
+            36.22662433580103
+          ],
+          [
+            20.503773,
+            36.226524
+          ],
+          [
+            20.503768617744413,
+            36.22654205899248
+          ],
+          [
+            20.50367,
+            36.226528
+          ],
+          [
+            20.50354687601573,
+            36.22703538368619
+          ],
+          [
+            20.497906,
+            36.226231
+          ],
+          [
+            20.497902596112795,
+            36.22624502206543
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    }
+  },
+  "job_priority": 6,
+  "job_specification": {
+    "command": "/home/ops/topsApp_pge/create_standard_product_s1.sh",
+    "container": "container-aria-jpl_topsapp_pge:develop",
+    "disk_usage": "200GB",
+    "id": "job-coseismic-s1gunw-topsapp:develop",
+    "imported_worker_files": {
+      "/home/ops/.aws": [
+        "/home/ops/.aws",
+        "ro"
+      ],
+      "/home/ops/.netrc": [
+        "/home/ops/.netrc"
+      ],
+      "/home/ops/verdi/etc/settings.conf": "/home/ops/topsApp_pge/conf/settings.conf"
+    },
+    "job-version": "develop",
+    "params": [
+      {
+        "destination": "context",
+        "name": "dataset_tag",
+        "value": "standard_coseismic_product_gunw1_triggered"
+      },
+      {
+        "destination": "context",
+        "name": "input_metadata",
+        "value": {
+          "_disk_usage": "100GB",
+          "auto_bbox": "true",
+          "azimuth_looks": 7,
+          "context": {},
+          "dem_type": "SRTM+v3",
+          "direction": "asc",
+          "endtime": "2021-02-18T16:32:29.519Z",
+          "filter_strength": 0.5,
+          "full_id_hash": "2e5c473348ad16b2930b9230c38212bb",
+          "id": "S1-GUNW-ifg-cfg-RM-M1S1-TN175-20210218T163229-20210206T163203-poeorb-2e5c",
+          "id_hash": "2e5c",
+          "localize_urls": [
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF"
+            },
+            {
+              "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+            },
+            {
+              "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+            }
+          ],
+          "master_acquisitions": [
+            "acquisition-S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E-esa_scihub"
+          ],
+          "master_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF",
+          "master_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF",
+          "master_scenes": [
+            "S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E"
+          ],
+          "master_zip_file": [
+            "S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+          ],
+          "master_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+          ],
+          "orbitNumber": [],
+          "platform": "",
+          "precise_orbit_only": "true",
+          "priority": 3,
+          "project": [
+            3
+          ],
+          "range_looks": 19,
+          "slave_acquisitions": [
+            "acquisition-S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14-esa_scihub"
+          ],
+          "slave_orbit_file": "S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF",
+          "slave_orbit_url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF",
+          "slave_scenes": [
+            "S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14"
+          ],
+          "slave_zip_file": [
+            "S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+          ],
+          "slave_zip_url": [
+            "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+          ],
+          "slc_master_dt": "20210218T163229",
+          "slc_slave_dt": "20210206T163203",
+          "soft_time_limit": 86400,
+          "starttime": "2021-02-06T16:32:03.003Z",
+          "tags": [
+            "s1-coseismic-gunw"
+          ],
+          "time_limit": 86700,
+          "track_number": 175,
+          "union_geojson": {
+            "coordinates": [
+              [
+                [
+                  20.497902596112795,
+                  36.22624502206543
+                ],
+                [
+                  20.497082,
+                  36.226128
+                ],
+                [
+                  20.497052850798955,
+                  36.2262480729524
+                ],
+                [
+                  20.49626,
+                  36.226135
+                ],
+                [
+                  20.49604189255191,
+                  36.22703337220262
+                ],
+                [
+                  20.495226,
+                  36.226917
+                ],
+                [
+                  20.360801301162937,
+                  36.78051268263032
+                ],
+                [
+                  20.358002,
+                  36.780117
+                ],
+                [
+                  20.357975208284532,
+                  36.78022645414472
+                ],
+                [
+                  20.357201,
+                  36.780117
+                ],
+                [
+                  20.357123496057486,
+                  36.780433580797485
+                ],
+                [
+                  20.356504,
+                  36.780346
+                ],
+                [
+                  20.356503219500183,
+                  36.78034918816631
+                ],
+                [
+                  20.346258,
+                  36.7789
+                ],
+                [
+                  20.346204836421297,
+                  36.779117019776244
+                ],
+                [
+                  20.346127,
+                  36.779106
+                ],
+                [
+                  20.34604569431683,
+                  36.77943789359558
+                ],
+                [
+                  20.345213,
+                  36.77932
+                ],
+                [
+                  19.948029,
+                  38.400558
+                ],
+                [
+                  19.948262085375582,
+                  38.400590149207765
+                ],
+                [
+                  19.948195,
+                  38.400864
+                ],
+                [
+                  19.94889294089046,
+                  38.40096025481108
+                ],
+                [
+                  19.948881,
+                  38.401009
+                ],
+                [
+                  19.949591356726586,
+                  38.401106875713516
+                ],
+                [
+                  19.561075,
+                  39.950703
+                ],
+                [
+                  19.561952538038142,
+                  39.95082097782191
+                ],
+                [
+                  19.561941,
+                  39.950867
+                ],
+                [
+                  19.562033412046425,
+                  39.9508794235486
+                ],
+                [
+                  19.562027,
+                  39.950905
+                ],
+                [
+                  19.562027570998694,
+                  39.95090507668513
+                ],
+                [
+                  19.561995,
+                  39.951035
+                ],
+                [
+                  19.563332482366885,
+                  39.9512146163071
+                ],
+                [
+                  19.563284,
+                  39.951408
+                ],
+                [
+                  19.563778872879176,
+                  39.95147445620236
+                ],
+                [
+                  19.563694,
+                  39.951813
+                ],
+                [
+                  19.563908425492567,
+                  39.95184179451716
+                ],
+                [
+                  19.563864,
+                  39.952019
+                ],
+                [
+                  19.565096894273836,
+                  39.95218456312773
+                ],
+                [
+                  19.565084,
+                  39.952236
+                ],
+                [
+                  22.137734069330524,
+                  40.29767948121924
+                ],
+                [
+                  22.544201,
+                  40.352318
+                ],
+                [
+                  22.544213102092183,
+                  40.35225959446269
+                ],
+                [
+                  22.574877,
+                  40.356377
+                ],
+                [
+                  22.574886386930892,
+                  40.35633159971258
+                ],
+                [
+                  22.575083,
+                  40.356358
+                ],
+                [
+                  22.575184317000712,
+                  40.35586796563006
+                ],
+                [
+                  22.575624,
+                  40.355927
+                ],
+                [
+                  22.575648323717644,
+                  40.35580934580715
+                ],
+                [
+                  22.575899,
+                  40.355843
+                ],
+                [
+                  22.5760246894771,
+                  40.355234963311105
+                ],
+                [
+                  22.576092,
+                  40.355244
+                ],
+                [
+                  22.57610552804576,
+                  40.35517855545652
+                ],
+                [
+                  22.576593,
+                  40.355244
+                ],
+                [
+                  22.70291598159935,
+                  39.74413168906233
+                ],
+                [
+                  22.706696,
+                  39.744644
+                ],
+                [
+                  22.706780997055045,
+                  39.74423074284519
+                ],
+                [
+                  22.707661,
+                  39.74435
+                ],
+                [
+                  22.70769008938612,
+                  39.74420855204582
+                ],
+                [
+                  22.708483,
+                  39.744316
+                ],
+                [
+                  22.708491809752726,
+                  39.74427315864804
+                ],
+                [
+                  22.709177,
+                  39.744366
+                ],
+                [
+                  22.709267160034887,
+                  39.74392749866955
+                ],
+                [
+                  22.709293,
+                  39.743931
+                ],
+                [
+                  23.042519,
+                  38.123249
+                ],
+                [
+                  23.041636255327603,
+                  38.12312616179715
+                ],
+                [
+                  23.041655,
+                  38.123035
+                ],
+                [
+                  23.041177333066166,
+                  38.12296852747707
+                ],
+                [
+                  23.3444,
+                  36.631191
+                ],
+                [
+                  21.004466759701057,
+                  36.29764026229355
+                ],
+                [
+                  20.504539,
+                  36.226368
+                ],
+                [
+                  20.504476795092135,
+                  36.22662433580103
+                ],
+                [
+                  20.503773,
+                  36.226524
+                ],
+                [
+                  20.503768617744413,
+                  36.22654205899248
+                ],
+                [
+                  20.50367,
+                  36.226528
+                ],
+                [
+                  20.50354687601573,
+                  36.22703538368619
+                ],
+                [
+                  20.497906,
+                  36.226231
+                ],
+                [
+                  20.497902596112795,
+                  36.22624502206543
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          }
+        }
+      },
+      {
+        "destination": "localize",
+        "name": "localize_products",
+        "value": [
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF"
+          },
+          {
+            "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+          },
+          {
+            "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+          }
+        ]
+      },
+      {
+        "destination": "context",
+        "name": "query",
+        "value": {
+          "query": {
+            "filtered": {
+              "filter": {
+                "and": [
+                  {
+                    "term": {
+                      "system_version.raw": "v2.0.0"
+                    }
+                  },
+                  {
+                    "ids": {
+                      "values": [
+                        "S1-GUNW-ifg-cfg-RM-M1S1-TN175-20210218T163229-20210206T163203-poeorb-2e5c"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "query": {
+                "bool": {
+                  "must": [
+                    {
+                      "term": {
+                        "metadata.tags.raw": "s1-coseismic-gunw"
+                      }
+                    },
+                    {
+                      "term": {
+                        "dataset.raw": "S1-GUNW-ifg-cfg"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "destination": "context",
+        "name": "name",
+        "value": "coseismic-product-topsapp"
+      },
+      {
+        "destination": "context",
+        "name": "username",
+        "value": "hysdsops"
+      }
+    ],
+    "post": [
+      "hysds.utils.triage"
+    ],
+    "recommended-queues": [
+      "s1gunw_coseismic-topsapp"
+    ],
+    "resource": "jobspec",
+    "soft_time_limit": 7200,
+    "time_limit": 7500
+  },
+  "localize_urls": [
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/03/10/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210310T121945_V20210217T225942_20210219T005942.EOF"
+    },
+    {
+      "url": "http://aria-dev-lts-fwd-torresal.s3-website-us-west-2.amazonaws.com/datasets/ancillary/v1.1/2021/02/26/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942-v1.1/S1A_OPER_AUX_POEORB_OPOD_20210226T121815_V20210205T225942_20210207T005942.EOF"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/18/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E/S1A_IW_SLC__1SDV_20210218T163202_20210218T163229_036647_044E4D_558E.zip"
+    },
+    {
+      "url": "s3://s3-us-west-2.amazonaws.com:80/aria-dev-lts-fwd-torresal/datasets/slc/v1.1/2021/02/06/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14/S1A_IW_SLC__1SDV_20210206T163203_20210206T163229_036472_04482E_FF14.zip"
+    }
+  ],
+  "name": "coseismic-product-topsapp",
+  "query": {
+    "query": {
+      "filtered": {
+        "filter": {
+          "and": [
+            {
+              "term": {
+                "system_version.raw": "v2.0.0"
+              }
+            },
+            {
+              "ids": {
+                "values": [
+                  "S1-GUNW-ifg-cfg-RM-M1S1-TN175-20210218T163229-20210206T163203-poeorb-2e5c"
+                ]
+              }
+            }
+          ]
+        },
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "metadata.tags.raw": "s1-coseismic-gunw"
+                }
+              },
+              {
+                "term": {
+                  "dataset.raw": "S1-GUNW-ifg-cfg"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "runtime_options": {},
+  "tag": "coseismic-product-topsapp",
+  "username": "hysdsops"
+}
