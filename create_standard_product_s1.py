@@ -1633,9 +1633,26 @@ def main():
     frame_metadata_dir = os.environ['TOPSAPP'] + '/frameMetadata'
     extract_cmd_tmpl = ('{}/extractMetadata_standard_product.sh -i '
                         '{}/annotation/s1?-iw?-slc-{}-*.xml -o {}')
+
+    subdir1 = master_zip_file[0].replace('.zip', '.SAFE')
+    print('subdir1: ', subdir1)
+    # this is pleiades/singularity specific: on pleiades the zip files were added "-local" in their names
+    # and upon unzipping, the string "-local" is gone in the subdir name
+    if '-local' in subdir1:
+      subdir1 = subdir1.replace('-local', '')
+      print('subdir1 after: ', subdir1)
+
+    """
     check_call(extract_cmd_tmpl.format(frame_metadata_dir,
                                        master_zip_file[0].replace('.zip',
                                                                   '.SAFE'),
+                                       master_pol,
+                                       met_file),
+               shell=True)
+    """
+
+    check_call(extract_cmd_tmpl.format(frame_metadata_dir,
+                                       subdir1,
                                        master_pol,
                                        met_file),
                shell=True)
