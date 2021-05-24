@@ -8,9 +8,9 @@
   "recommended-queues" : [
     "s1gunw_coseismic-topsapp"
   ],
-  "soft_time_limit": 7200,
-  "time_limit": 7500,
-  "disk_usage":"200GB",
+  "soft_time_limit": 10800,
+  "time_limit": 11100,
+  "disk_usage":"215GB",
   "post": [ "hysds.utils.triage" ],
   "params" : [
     {
