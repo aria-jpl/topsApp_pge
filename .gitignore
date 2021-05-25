@@ -73,6 +73,7 @@ celerybeat-schedule
 !tests/coseismic_standard_product_pipeline_2/_context.json
 !tests/coseismic_standard_product_pipeline_2_full/_context.json
 !tests/coseismic_standard_product_pipeline_3_short_circuit/_context.json
+!tests/coseismic_standard_product_pipeline_4_full_R2S2/_context.json
 !tests/standard_product_pipeline_1/_context.json
 !tests/standard_product_pipeline_2/_context.json
 !tests/standard_product_pipeline_3_short_circuit/_context.json
