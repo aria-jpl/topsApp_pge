@@ -1,6 +1,7 @@
 {
   "_command": "/home/ops/topsApp_pge/create_standard_product_s1.sh",
   "_disk_usage": "215GB",
+  "local_test": true,
   "_prov": {
     "wasGeneratedBy": "task_id:57fe4783-e3fa-4cd9-a96d-60d3e7f91ebb"
   },

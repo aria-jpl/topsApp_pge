@@ -59,6 +59,7 @@ To add additional end-to-end tests with different data one generally needs:
    1. A `_context.json` with the master/slave (or primary/secondary) image names correctly populated. Although the `_context.json` is long, only these ids and zip file names are needed and effectively one can copy and paste them in. I have generally obtained these files directly from TOSCA.
    2. SLCs  download. I used the `list` search through ASF.
    3. And preferably, determine a small region of interest to reduce runtime
+   4. Make sure to add `local_test` as `true` in the `_context.json` if you are going to test deduplication and look up in our ES database.
 
 ## Modifying Context.json to reduce runtime
 
@@ -70,7 +71,9 @@ Using some basic GIS, we look at the swath footprints and create a subset in the
 "swathnum": [2],
 "testing": true,
 "region_of_interest": [South, North, East, West]
+"local_test": true
 ```
+Note the last entry is for "short circuiting" tests or tests that use an actual `_context.json` from the system.
 
 # Interactive debugging
 
