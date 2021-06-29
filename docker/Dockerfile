@@ -6,9 +6,11 @@ LABEL description="TopsApp PGE Container"
 COPY . /home/ops/topsApp_pge
 
 RUN set -ex \
-    && sudo /opt/conda/bin/conda install -c conda-forge --yes httplib2 lxml pyproj joblib pandas \
-    && $HOME/verdi/bin/pip install joblib netcdf4 \
-    && $HOME/verdi/bin/pip install --upgrade elasticsearch-dsl elasticsearch \
+    && sudo /opt/conda/bin/conda install -c conda-forge --yes httplib2 lxml pyproj joblib pandas geopandas rasterio tmux jupyter \
+    && sudo /home/ops/verdi/bin/pip install --upgrade pyproj \
+    && $HOME/verdi/bin/pip install --upgrade elasticsearch-dsl elasticsearch boto3 \
+    && /opt/conda/bin/pip install --upgrade elasticsearch-dsl elasticsearch \
+    && /opt/conda/bin/pip install git+https://github.com/aria-jpl/dem_stitcher.git \
     && $HOME/verdi/bin/pip install 'fiona==1.7.13' \
     && sudo rm -rf /root/.cache \
     && sudo chown -R ops:ops /home/ops/topsApp_pge \
