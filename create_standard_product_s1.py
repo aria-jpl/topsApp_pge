@@ -12,6 +12,10 @@ import shutil
 import traceback
 import logging
 import hashlib
+import rasterio
+import geopandas as gpd
+from shapely.geometry import box
+
 import math
 from subprocess import (check_call,
                         CalledProcessError)
@@ -27,6 +31,8 @@ from topsApp_utils.imutils import (get_image,
                                    get_size,
                                    crop_mask)
 from topsApp_utils.fetchCalES import fetch as fetch_aux_cal
+from dem_stitcher.stitcher import download_dem
+from dem_stitcher.rio_tools import resample_by_multiple
 
 from topsApp_utils.sent1_bbox import get_envelope_from_all_slcs
 from topsApp_utils.time_utils import getTemporalSpanInDays
@@ -799,6 +805,26 @@ def unzip_annotation_xmls(zip_path: str) -> list:
     return out
 
 
+def updateErrorFiles(msg):
+    msg = msg.strip()
+
+    with open('_alt_error.txt', 'w') as f:
+        f.write(f'{msg}\n')
+    with open('_alt_traceback.txt', 'w') as f:
+        f.write('%s\n' % traceback.format_exc())
+
+
+def fix_image_xml(isce_raster_path):
+    isce_home = os.environ['ISCE_HOME']
+    fix_cmd = [f'{isce_home}/applications/fixImageXml.py',
+               '-i',
+               str(isce_raster_path),
+               '--full']
+    fix_cmd_line = ' '.join(fix_cmd)
+    check_call(fix_cmd_line, shell=True)
+    return isce_raster_path
+
+
 def main():
     """HySDS PGE wrapper for TopsInSAR interferogram generation."""
 
@@ -842,11 +868,8 @@ def main():
     master_ids = input_metadata['master_scenes']
     slave_ids = input_metadata['slave_scenes']
     direction = input_metadata['direction']
-    platform = input_metadata['platform']
     master_zip_file = input_metadata['master_zip_file']
     slave_zip_file = input_metadata['slave_zip_file']
-    master_orbit_file = input_metadata['master_orbit_file']
-    slave_orbit_file = input_metadata['slave_orbit_file']
     master_orbit_url = input_metadata['master_orbit_url']
     slave_orbit_url = input_metadata['slave_orbit_url']
     track = input_metadata['track_number']
@@ -920,34 +943,7 @@ def main():
     azimuth_looks = ctx['azimuth_looks']
     range_looks = ctx['range_looks']
 
-    # log inputs
-    logger.info('project: {}'.format(project))
-    logger.info('master_ids: {}'.format(master_ids))
-    logger.info('slave_ids: {}'.format(slave_ids))
-    logger.info('subswaths: {}'.format(ctx['swathnum']))
-    logger.info('azimuth_looks: {}'.format(azimuth_looks))
-    logger.info('range_looks: {}'.format(range_looks))
-    logger.info('filter_strength: {}'.format(filter_strength))
-    logger.info('precise_orbit_only: {}'.format(precise_orbit_only))
-    logger.info('direction : {}'.format(direction))
-    logger.info('platform : {}'.format(platform))
-    logger.info('direction : {}'.format(direction))
-    logger.info('platform : {}'.format(platform))
-
-    logger.info('master_zip_file : {}'.format(master_zip_file))
-    logger.info('slave_zip_file : {}'.format(slave_zip_file))
-    logger.info('master_orbit_file : {}'.format(master_orbit_file))
-    logger.info('slave_orbit_file : {}'.format(slave_orbit_file))
-
-    logger.info(f'Using azimuth_looks of {azimuth_looks}'
-                f' and range_looks of {range_looks}')
-    logger.info('STITCHED SWATHS')
-
     ctx['filter_strength'] = ctx.get('context', {}).get('filter_strength', 0.5)
-    logger.info('Using filter_strength of %f' % ctx['filter_strength'])
-
-    logger.info('\nContext \n')
-    logger.info(json.dumps(ctx, indent=4, sort_keys=True))
 
     # Check if ifg_name exists
     version = get_version()
@@ -984,8 +980,6 @@ def main():
         raise RuntimeError(err_msg)
 
     # get union bbox
-    logger.info('Determining envelope bbox from SLC swaths.')
-
     envelope_dict = get_envelope_from_all_slcs()
     bbox = [envelope_dict['ymin'],
             envelope_dict['ymax'],
@@ -997,25 +991,8 @@ def main():
               open('bbox.json', 'w'),
               indent=2)
 
-    logger.info(f'bbox: {json.dumps(bbox_json, indent=2)}')
-
     # get dataset version and set dataset ID
     version = get_version()
-
-    # get endpoint configurations
-
-    # get DEM configuration
-    dem_type = ctx['dem_type']
-    logger.info(f'dem_type: {dem_type}')
-    dem_type_simple = None
-    dem_url = SETTINGS_DICT['ARIA_DEM_URL']
-    # This is not in our settings currently
-    srtm3_dem_url = SETTINGS_DICT.get('ARIA_SRTM3_DEM_URL')
-    ned1_dem_url = SETTINGS_DICT['ARIA_NED1_DEM_URL']
-    ned13_dem_url = SETTINGS_DICT['ARIA_NED13_DEM_URL']
-
-    preprocess_dem_dir = 'preprocess_dem'
-    geocode_dem_dir = 'geocode_dem'
 
     # download project specific preprocess DEM
 
@@ -1026,130 +1003,40 @@ def main():
     dem_W = int(math.floor(dem_W))
     dem_E = int(math.ceil(dem_E))
 
-    logger.info('DEM TYPE : %s' % dem_type)
-    if dem_type.startswith('SRTM'):
-        dem_type_simple = 'SRTM'
-        if dem_type.startswith('SRTM3'):
-            dem_url = srtm3_dem_url
-            dem_type_simple = 'SRTM3'
+    xmin, ymin, xmax, ymax = dem_W, dem_S, dem_E, dem_N
+    bounds = [xmin, ymin, xmax, ymax]
 
-        dem_cmd = [
-            '{}/applications/dem.py'.format(os.environ['ISCE_HOME']), '-a',
-            'stitch', '-b', '{} {} {} {}'.format(dem_S,
-                                                 dem_N,
-                                                 dem_W,
-                                                 dem_E),
-            '-r', '-s', '1', '-f', '-x', '-c', '-n', dem_user, '-w',
-            dem_pass, '-u', dem_url
-        ]
-        dem_cmd_line = ' '.join(dem_cmd)
-        logger.info('Calling dem.py: {}'.format(dem_cmd_line))
-        check_call(dem_cmd_line, shell=True)
-        preprocess_dem_file = glob('*.dem.wgs84')[0]
+    df_world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+    df_us = df_world[df_world.iso_a3 == 'USA'].reset_index(drop=True)
+    us_geo = df_us.geometry.unary_union
+    us_intersection = us_geo.intersects(box(*bounds))
 
+    if us_intersection:
+        DEM_NAME = '3dep'
     else:
-        if dem_type == 'NED1':
-            dem_url = ned1_dem_url
-            dem_type_simple = 'NED1'
-        elif dem_type.startswith('NED13'):
-            dem_url = ned13_dem_url
-            dem_type_simple = 'NED13'
-        else:
-            raise RuntimeError('Unknown dem type %s.' % dem_type)
-        if dem_type == 'NED13-downsampled':
-            downsample_option = '-d 33%'
-        else:
-            downsample_option = ''
+        DEM_NAME = 'nasadem'
 
-        dem_S = dem_S - 1 if dem_S > -89 else dem_S
-        dem_N = dem_N + 1 if dem_N < 89 else dem_N
-        dem_W = dem_W - 1 if dem_W > -179 else dem_W
-        dem_E = dem_E + 1 if dem_E < 179 else dem_E
+    # DEM_NAME = ctx['dem_name']
+    preprocess_dem_dir = f'_{DEM_NAME}_preprocess_dem'
+    preprocess_dem_path = download_dem(bounds, DEM_NAME, preprocess_dem_dir)
 
-        topsApp_util_dir = os.environ['TOPSAPP'] + '/topsApp_utils'
-        dem_cmd = [
-            '{}/ned_dem.py'.format(topsApp_util_dir), '-a',
-            'stitch', '-b', '{} {} {} {}'.format(dem_S,
-                                                 dem_N,
-                                                 dem_W,
-                                                 dem_E),
-            downsample_option, '-u', dem_user, '-p', dem_pass, dem_url
-        ]
-        dem_cmd_line = ' '.join(dem_cmd)
-        logger.info('Calling ned_dem.py: {}'.format(dem_cmd_line))
-        check_call(dem_cmd_line, shell=True)
-        preprocess_dem_file = 'stitched.dem'
+    with rasterio.open(preprocess_dem_path) as ds:
+        dem_array, dem_profile = ds.read(1), ds.profile
 
-    logger.info('Preprocess DEM file: {}'.format(preprocess_dem_file))
+    dem_geocode_arr, dem_geocode_profile = resample_by_multiple(dem_array,
+                                                                dem_profile,
+                                                                3)
+    dem_geocode_arr = dem_geocode_arr[0, ...]
 
-    preprocess_dem_dir = '{}_{}'.format(dem_type_simple, preprocess_dem_dir)
+    geocode_dem_dir = Path(f'_{DEM_NAME}_geocode_dem')
+    geocode_dem_dir.mkdir(exist_ok=True, parents=True)
 
-    logger.info('dem_type : %s preprocess_dem_dir : %s' % (dem_type,
-                                                           preprocess_dem_dir))
-    if dem_type.startswith('NED'):
-        move_dem_separate_dir_NED(preprocess_dem_dir)
-    elif dem_type.startswith('SRTM'):
-        move_dem_separate_dir_SRTM(preprocess_dem_dir)
-    else:
-        move_dem_separate_dir(preprocess_dem_dir)
+    geocode_dem_path = geocode_dem_dir/preprocess_dem_path.name
+    with rasterio.open(geocode_dem_path, 'w', **dem_geocode_profile) as ds:
+        ds.write(dem_geocode_arr, 1)
 
-    preprocess_dem_file = os.path.join(preprocess_dem_dir, preprocess_dem_file)
-    logger.info('Using Preprocess DEM file: {}'.format(preprocess_dem_file))
-
-    # fix file path in Preprocess DEM xml
-    fix_cmd = [
-        '{}/applications/fixImageXml.py'.format(os.environ['ISCE_HOME']),
-        '-i', preprocess_dem_file, '--full'
-    ]
-    fix_cmd_line = ' '.join(fix_cmd)
-    logger.info('Calling fixImageXml.py: {}'.format(fix_cmd_line))
-    check_call(fix_cmd_line, shell=True)
-
-    preprocess_vrt_file = ''
-    if dem_type.startswith('SRTM'):
-        glob_pattern = os.path.join(preprocess_dem_dir, '*.dem.wgs84.vrt')
-        preprocess_vrt_file = glob(glob_pattern)[0]
-    elif dem_type.startswith('NED1'):
-        preprocess_vrt_file = os.path.join(preprocess_dem_dir,
-                                           'stitched.dem.vrt')
-        logger.info('preprocess_vrt_file : %s' % preprocess_vrt_file)
-    else:
-        raise RuntimeError('Unknown dem type %s.' % dem_type)
-
-    if not os.path.isfile(preprocess_vrt_file):
-        logger.info('%s does not exists. Exiting')
-
-    geocode_dem_dir = os.path.join(preprocess_dem_dir,
-                                   f'Coarse_{dem_type_simple}_preprocess_dem')
-    create_dir(geocode_dem_dir)
-    dem_cmd = [
-        '{}/applications/downsampleDEM.py'.format(os.environ['ISCE_HOME']),
-        '-i',
-        '{}'.format(preprocess_vrt_file), '-rsec', '3'
-    ]
-    dem_cmd_line = ' '.join(dem_cmd)
-    logger.info('Calling downsampleDEM.py: {}'.format(dem_cmd_line))
-    check_call(dem_cmd_line, shell=True)
-    geocode_dem_file = ''
-
-    logger.info('geocode_dem_dir : {}'.format(geocode_dem_dir))
-    if dem_type.startswith('SRTM'):
-        glob_pattern = os.path.join(geocode_dem_dir, '*.dem.wgs84')
-        geocode_dem_file = glob(glob_pattern)[0]
-    elif dem_type.startswith('NED1'):
-        geocode_dem_file = os.path.join(geocode_dem_dir, 'stitched.dem')
-    logger.info('Using Geocode DEM file: {}'.format(geocode_dem_file))
-
-    checkBurstError()
-
-    # fix file path in Geocoding DEM xml
-    fix_cmd = [
-        '{}/applications/fixImageXml.py'.format(os.environ['ISCE_HOME']),
-        '-i', geocode_dem_file, '--full'
-    ]
-    fix_cmd_line = ' '.join(fix_cmd)
-    logger.info('Calling fixImageXml.py: {}'.format(fix_cmd_line))
-    check_call(fix_cmd_line, shell=True)
+    fix_image_xml(preprocess_dem_path)
+    fix_image_xml(geocode_dem_path)
 
     # download auciliary calibration files
     fetch_aux_cal('aux_cal', False)
@@ -1169,8 +1056,8 @@ def main():
                          SLAVE_SAFE_DIR=slave_zip_file,
                          MASTER_ORBIT_FILE=master_orbit,
                          SLAVE_ORBIT_FILE=slave_orbit,
-                         DEM_FILE=preprocess_dem_file,
-                         GEOCODE_DEM_FILE=geocode_dem_file,
+                         DEM_FILE=str(preprocess_dem_path),
+                         GEOCODE_DEM_FILE=str(geocode_dem_path),
                          SWATHNUM=str(ctx['swathnum']),
                          AZIMUTH_LOOKS=ctx['azimuth_looks'],
                          RANGE_LOOKS=ctx['range_looks'],
@@ -1276,7 +1163,6 @@ def main():
 
     ifg_hash = ctx['new_ifg_hash']
     direction = ctx['direction']
-    platform = ctx['platform']
     orbit_type = ctx['orbit_type']
     track = ctx['track_number']
     slave_ifg_dt = ctx['slc_slave_dt']
@@ -1725,7 +1611,6 @@ def main():
     md['union_geojson'] = ctx['union_geojson']
 
     # add dem_type
-    md['dem_type'] = dem_type
     md['sensingStart'] = sensing_start
     md['sensingStop'] = sensing_stop
     md['tags'] = ['standard_product']
@@ -1778,15 +1663,6 @@ def main():
     logger.info('nc_file_md5 : {}'.format(nc_file_md5))
     with open(nc_checksum_file, 'w') as f:
         f.write(nc_file_md5)
-
-
-def updateErrorFiles(msg):
-    msg = msg.strip()
-
-    with open('_alt_error.txt', 'w') as f:
-        f.write(f'{msg}\n')
-    with open('_alt_traceback.txt', 'w') as f:
-        f.write('%s\n' % traceback.format_exc())
 
 
 if __name__ == '__main__':
