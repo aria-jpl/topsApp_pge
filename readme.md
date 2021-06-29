@@ -17,7 +17,7 @@ To ensure jobs are not erroneously run using datasets across pipelines, we also 
 
 The best way to build the image for this PGE is via the Dockerfile. Specifically from the terminal, navigate to this repository and then build the docker image using:
 
-```docker build -f docker/Dockerfile -t standard_product .```
+```docker build -f docker/Dockerfile -t standard_product_img .```
 
 See the testing section for more details on how to test and interact with the code. Note that the [context](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#understand-build-context) of the `docker build` must be this repo.
 
