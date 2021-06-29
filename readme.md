@@ -47,6 +47,8 @@ Use the end-to-end tests expounded in the `tests` directory. Please see the [tes
 * v2.0.4
     * Reorganized Repo from [here](https://github.com/aria-jpl/ariamh/tree/ARIA-581/interferogram/sentinel)
 
+*Note*: for version changing one must change **both** `conf/dataset_version.json` and `conf/config-*-s1gunw-topsapp.json` for correct de-duping. We should consolidate at some point -- the former json is a legacy part of hysds systems and I haven't tried removing it.
+
 
 ## Contributing
 
@@ -56,6 +58,17 @@ Use the end-to-end tests expounded in the `tests` directory. Please see the [tes
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
+
+Then, test the changes locally. To test operationally, increase version number, don't de-dupe on minor version changes, and compare to old products.
+
+For not de-duping on minor version changes make sure you have the following set to false in the main python script:
+
+```
+def get_gunw_query(reference_scenes: list,
+                   secondary_scenes: list,
+                   version: str,
+                   up_to_minor_version: bool = False): ...
+```
 
 ## Support
 

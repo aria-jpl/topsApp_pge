@@ -192,7 +192,10 @@ def update_str(item: str) -> str:
 
 def get_gunw_query(reference_scenes: list,
                    secondary_scenes: list,
-                   version: str):
+                   version: str,
+                   up_to_minor_version: bool = False):
+
+    version_str = f'{version[:2]}*' if up_to_minor_version else version
     reference_scenes_ = list(map(update_str, reference_scenes))
     secondary_scenes_ = list(map(update_str, secondary_scenes))
 
@@ -205,8 +208,8 @@ def get_gunw_query(reference_scenes: list,
                            default_field="metadata.secondary_scenes")
                          for scene in secondary_scenes_]
     version_match = [Q('query_string',
-                       query=version[:3],
-                       default_field="version")]
+                       query=version_str,
+                       default_field="version.raw")]
     qq = Q('bool', must=(reference_matches +
                          secondary_matches +
                          version_match))
