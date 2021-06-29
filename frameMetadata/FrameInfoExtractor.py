@@ -21,6 +21,10 @@ import numpy
 import json
 from httplib2 import Http
 from urllib.parse import urlencode
+
+import sys
+sys.path.append(os.environ['TOPSAPP'])
+
 from frameMetadata.FrameMetadata import FrameMetadata
 from frameMetadata.OrbitInfo import OrbitInfo
 from topsApp_utils.UrlUtils import UrlUtils

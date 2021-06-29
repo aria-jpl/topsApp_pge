@@ -21,7 +21,13 @@ import isce
 from xml.etree.ElementTree import ElementTree
 import datetime
 import isceobj
-from frameMetadata.BurstSLC import BurstSLC
+from pathlib import Path
+
+import sys
+this_directory = Path(__file__).parent.absolute()
+sys.path.append(this_directory)
+from BurstSLC import BurstSLC
+
 from isceobj.Util import Poly1D, Poly2D
 from isceobj.Planet.Planet import Planet
 from isceobj.Orbit.Orbit import StateVector, Orbit

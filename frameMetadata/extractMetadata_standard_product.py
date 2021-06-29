@@ -9,7 +9,12 @@ import isce
 from isceobj.Scene.Frame import Frame
 from isceobj.Planet.AstronomicalHandbook import Const
 from isceobj.Planet.Planet import Planet
-from frameMetadata.Sentinel1_TOPS import Sentinel1_TOPS
+
+import sys
+from pathlib import Path
+this_directory = Path(__file__).parent.absolute()
+sys.path.append(this_directory)
+from Sentinel1_TOPS import Sentinel1_TOPS
 import argparse
 from lxml import objectify as OBJ
 from FrameInfoExtractor import FrameInfoExtractor as FIE

@@ -2,6 +2,7 @@
   "testing": true,
   "region_of_interest": [35.4, 36, -120.5, -119.2],
   "swathnum": [2],
+  "dem_name": "3dep",
   "_command": "/home/ops/coseismic-topsApp/create_standard_coseismic_product_s1.sh",
   "_disk_usage": "200GB",
   "_prov": {

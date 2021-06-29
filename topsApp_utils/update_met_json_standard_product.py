@@ -7,6 +7,10 @@ from lxml.etree import parse
 from osgeo import gdal, ogr, osr
 import numpy as np
 import isce
+
+import sys
+sys.path.append(os.environ['TOPSAPP'])
+
 from iscesys.Component.ProductManager import ProductManager as PM
 from isceobj.Orbit.Orbit import Orbit
 
